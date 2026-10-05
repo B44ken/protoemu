@@ -1,0 +1,54 @@
+{
+  "clock_hz": 60000000,
+  "tiles": "6x4",
+  "process": "ihp-sg13cmos5l",
+  "pdk_revision": "2bbec755dc67ca3db0261c3d6163e15735d66710",
+  "mapped_area_um2": 457847.8506,
+  "standard_cell_row_area_um2": 902417,
+  "library_cells": 21956,
+  "pre_route_setup_slack_ns": {
+    "typ_1p20v_25c": 11.23,
+    "slow_1p08v_125c": 8.28
+  },
+  "timing_assumptions": {
+    "clock_uncertainty_ns": 0.25,
+    "clock_transition_ns": 0.15,
+    "io_delay_ns": 3.333333333333334,
+    "output_load_ff": 6,
+    "wire_parasitics": "none",
+    "clock_tree": "ideal"
+  },
+  "verification": {
+    "c_rtl_comparisons": 50000,
+    "usb_codec_phase_frequency_cases": 30960,
+    "rtl_integration_tests": 7,
+    "gate_integration_tests": 7,
+    "rtl_uart_duplex_bytes_each_direction": 256,
+    "rtl_uart_phase_skew_cases": 15,
+    "rtl_usb_phase_frequency_cases": 120,
+    "gate_uart_duplex_bytes_each_direction": 16,
+    "gate_uart_phase_skew_cases": 9,
+    "gate_usb_phase_frequency_cases": 9,
+    "gate_timing": "functional cell simulation; extracted timing not simulated",
+    "regenerated_vs_synthesized_core": "formal equivalence proved for all 83 output bits"
+  },
+  "unverified": [
+    "placement and routing",
+    "extracted timing",
+    "drc/lvs",
+    "usb enumeration",
+    "full usb electrical/jitter compliance"
+  ],
+  "rtl_sha256": {
+    "project.v": "5359ed1c6e80a098803875f13220e7493edaad2990a93cfe19dc78950d3bd0f8",
+    "engine_wrap.v": "e6fe64a3c40ac37381f9b10b77103876e728eccd7d5f9ee8133d098c38fa3860",
+    "engine.v": "164ed9fcff363f0aa65e37f378a6ad3cff30bbcefc21d17bbd180d4492682e1f",
+    "fifo.v": "36e764792750c0263b0433da0368e208170175960783328fbf8206720a1cb8c0"
+  },
+  "synthesis_rtl_sha256": {
+    "project.v": "5359ed1c6e80a098803875f13220e7493edaad2990a93cfe19dc78950d3bd0f8",
+    "engine_wrap.v": "e6fe64a3c40ac37381f9b10b77103876e728eccd7d5f9ee8133d098c38fa3860",
+    "engine.v": "8a54060f43a62700424b29257430963f4f14f40f5a468bc982b2766918f95303",
+    "fifo.v": "36e764792750c0263b0433da0368e208170175960783328fbf8206720a1cb8c0"
+  }
+}

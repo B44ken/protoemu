@@ -1,0 +1,3 @@
+pycparser==3.0
+pyrtl==1.0.3
+setuptools==84.0.0

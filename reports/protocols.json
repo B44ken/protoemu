@@ -1,0 +1,115 @@
+{
+  "clock_hz": 60000000,
+  "tiles": "6x4",
+  "process": "ihp-sg13cmos5l",
+  "mapped_area_um2": 458296.65,
+  "standard_cell_row_area_um2": 902417,
+  "library_cells": 22805,
+  "metadata_cells": 8,
+  "pre_route_setup_slack_ns": {
+    "typ_1p20v_25c": 10.56,
+    "slow_1p08v_125c": 7.26
+  },
+  "timing_assumptions": {
+    "clock_uncertainty_ns": 0.25,
+    "clock_transition_ns": 0.15,
+    "io_delay_ns": 3.333333333,
+    "output_load_ff": 6,
+    "wire_parasitics": "none",
+    "clock_tree": "ideal"
+  },
+  "verification": {
+    "c_rtl_comparisons": 50022,
+    "usb_codec_phase_frequency_cases": 30960,
+    "ethernet_codec_phase_frequency_cases": 432,
+    "rtl_integration_tests": [
+      "uart_duplex",
+      "usb_transmit",
+      "usb_receive",
+      "faults_and_reprogramming",
+      "uart_bad_stop_and_break",
+      "uart_receive_phase_and_skew",
+      "usb_receive_phase_and_frequency",
+      "spi_modes",
+      "i2c_write_restart_read",
+      "i2c_nack",
+      "i2c_arbitration",
+      "ethernet_transmit",
+      "ethernet_receive",
+      "ethernet_fifo_faults"
+    ],
+    "gate_integration_tests": [
+      "spi_modes",
+      "i2c_write_restart_read",
+      "i2c_nack",
+      "i2c_arbitration",
+      "ethernet_transmit",
+      "ethernet_receive",
+      "ethernet_fifo_faults"
+    ],
+    "gate_profile": "full serial; representative ethernet frames; no uart/usb gate rerun",
+    "gate_timing": "functional cell simulation; extracted timing not simulated",
+    "regenerated_vs_synthesis_snapshot_core": "formal equivalence proved for all 87 output bits",
+    "rtl_ethernet_frame_bytes": [
+      14,
+      1514
+    ],
+    "gate_ethernet_frame_bytes": [
+      14,
+      60
+    ],
+    "ethernet_codec_clock_offset_ppm": [
+      -100,
+      0,
+      100
+    ]
+  },
+  "unverified": [
+    "placement and routing",
+    "extracted timing",
+    "drc/lvs",
+    "usb enumeration and full electrical/jitter compliance",
+    "ethernet cable electrical compliance"
+  ],
+  "outside_current_scope": [
+    "ethernet link pulses and negotiation",
+    "ethernet collision handling",
+    "sustained simultaneous ethernet tx/rx through the host interface"
+  ],
+  "rtl_sha256": {
+    "project.v": "ccf54afe7b7d081869882b148b84f511b50a200f880bcc7e9a7c953d538cfa76",
+    "engine_wrap.v": "fd6109b89a5cca8eb118fa1c1c3af2a0f1a91bae29c0a6c0ba3f260eeab83875",
+    "engine.v": "235fec94c255703db0edd64f035fcb6ed8e88be7c97af2a1072f99dd513dc2f7",
+    "fifo.v": "36e764792750c0263b0433da0368e208170175960783328fbf8206720a1cb8c0"
+  },
+  "synthesis_rtl_sha256": {
+    "project.v": "ccf54afe7b7d081869882b148b84f511b50a200f880bcc7e9a7c953d538cfa76",
+    "engine_wrap.v": "fd6109b89a5cca8eb118fa1c1c3af2a0f1a91bae29c0a6c0ba3f260eeab83875",
+    "engine.v": "8bee3f915bc1d92f1e5ff3acf92641bc7138092602ba8a9d2e3f5860b3149eb0",
+    "fifo.v": "36e764792750c0263b0433da0368e208170175960783328fbf8206720a1cb8c0"
+  },
+  "firmware_sha256": {
+    "firmware/ethernet.c": "2094d17a736c53b52839e9982a5956e075ec093e485d1896331d940d3553e4e3",
+    "firmware/ethernet.h": "9d6771da52d4b5fd5202118a2b491c5f97d26e9860bc03735dac6efb2162800d",
+    "firmware/ethernet_program.c": "1435bee81eb96491f975cac04ef0f17e3033c417ce81884cf3086342b826c25c",
+    "firmware/pio.h": "c0451870c1d143df632a3e36cda3f58ca66c67deef4492205caa59742f397f66",
+    "firmware/programs.c": "98224d53ebd1db455cea41a6a2eb0b4fead58eaebcb039d9c0c34c1e3e3a7bb8",
+    "firmware/serial.c": "a3b69f8e19bd6a0cb8d30fe20768052bc307a62d186979de2d8e2a1063e52f4d",
+    "firmware/serial.h": "ffb8be599a810c7df952e095408d3e3e8fa100788881c21caa12557d6561c2a7",
+    "firmware/serial_program.c": "eb46909414428a59f713b0df6f4799fc98dc3e1452a11c08557543ac4d55eb78",
+    "firmware/test_ethernet.c": "24df5154d864f0740f1edc68fbdb39a4b9623865bcfc62065ba61339e008408b",
+    "firmware/test_usb.c": "3659babd0f76d68ae4acdedded6e5ed4660eaf901de169cd9a0bcc0708d26586",
+    "firmware/usb.c": "703462a8614e60156b1f02569c8c2996d4141c5fd30bf25f6f49e4707d21a914",
+    "firmware/usb.h": "a7b33650d765d8d36610900c88ad5b592d696a074e66d35f5e4c77376bd67a56"
+  },
+  "test_sha256": {
+    "ttihp/test/test.py": "a9884cfb104a1edb944355b491b1c3740fddcee1ac29bf386662c8eeb90a78af",
+    "ttihp/test/test_errors.py": "04b848644db26037ce3dc0e7a9862da34eb2b9c2ac0d7b6a7d894df43f625d96",
+    "ttihp/test/test_ethernet.py": "7797a0dddb73f2c68cbf85c0bd1366ceee0834cf741af87197c3f24ebd9590a1",
+    "ttihp/test/test_serial.py": "42cb5578aa49a00a4ecbc4433c28db2ba478bbd277326b8609375ae3df460511"
+  },
+  "liberty_sha256": {
+    "sg13cmos5l_stdcell_typ_1p20V_25C.lib": "34163f3e7de9f854afac57332ba06f1739b78e7ac35660a8a5ddd39c570124ad",
+    "sg13cmos5l_stdcell_slow_1p08V_125C.lib": "3ee222c580ba33acb2131ac2bf224ff8ee9700751835b73aaec72b670bb31d3c"
+  }
+}
