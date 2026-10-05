@@ -1,0 +1,63 @@
+name: final gds lvs
+
+on:
+  workflow_dispatch:
+    inputs:
+      run-id:
+        description: official routed gds run
+        required: true
+        default: "37265810882"
+
+jobs:
+  gds_lvs:
+    runs-on: ubuntu-24.04
+    permissions:
+      actions: read
+      contents: read
+    env:
+      PDK_ROOT: /home/runner/pdk
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+      - name: download routed views
+        uses: actions/download-artifact@37930b1c2abaa49bbe596cd826c3c89aef350131 # v7
+        with:
+          name: GDS_logs
+          run-id: ${{ inputs.run-id }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+      - name: download delivered layout
+        uses: actions/download-artifact@37930b1c2abaa49bbe596cd826c3c89aef350131 # v7
+        with:
+          name: tt_submission
+          run-id: ${{ inputs.run-id }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+        with:
+          repository: TinyTapeout/tt-support-tools
+          ref: d66cf179e7bc4d296362ab7e2e3b344dc3c4f665
+          path: tt
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+        with:
+          repository: TinyTapeout/tt-gds-action
+          ref: 3412659307918422f3f0727917cf9b499aaca588
+          path: physical-action
+      - uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1 # v6
+        with:
+          python-version: "3.11.16"
+      - name: install pinned tools and pdk
+        run: |
+          physical-action/install_sg13cmos5l.sh
+          pip install librelane==3.1.0.dev3
+      - name: identify delivered layout
+        run: |
+          cat tt_submission/commit_id.json
+          cat tt_submission/pdk.json
+          cmp tt_submission/tt_um_protoemu.gds runs/wokwi/final/gds/tt_um_protoemu.gds
+          sha256sum tt_submission/tt_um_protoemu.gds
+      - name: extract final gds and compare
+        run: tools/gds-lvs.sh
+      - name: retain extraction and lvs reports
+        if: always()
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
+        with:
+          name: final_gds_lvs
+          path: src/runs/gds-lvs

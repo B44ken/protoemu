@@ -1,5 +1,7 @@
 # protoemu
 
+the [prototype release](https://github.com/B44ken/protoemu/releases/tag/prototype-2026-10-05) retains firmware images, proof logs, test results and captures with checksums. physical sign-off remains pending.
+
 [![test](https://github.com/B44ken/protoemu/actions/workflows/test.yaml/badge.svg)](https://github.com/B44ken/protoemu/actions/workflows/test.yaml) [![gds](https://github.com/B44ken/protoemu/actions/workflows/gds.yaml/badge.svg)](https://github.com/B44ken/protoemu/actions/workflows/gds.yaml) [![docs](https://github.com/B44ken/protoemu/actions/workflows/docs.yaml/badge.svg)](https://github.com/B44ken/protoemu/actions/workflows/docs.yaml)
 
 a c/hls first pass at the [jane street protocol emulator competition](https://blog.janestreet.com/protocol-emulator-asic-competition/), targeting 24 tiny tapeout ihp tiles (6×4) and a fixed 60 mhz clock.

@@ -43,6 +43,8 @@ precheck runs nine cmos5l checks: pin-label overlap, foundry drc, zero area, lay
 
 final-gds lvs follow-up uses the supported librelane cli: `--from Magic.SpiceExtraction --to Checker.LVS --override-config MAGIC_EXT_USE_GDS=true`, initialized with the exact gds, routed def and powered netlist. it reuses completed routing.
 
+`.github/workflows/gds-lvs.yaml` accepts the completed routed build's run id, checks that the delivered and final-view gds match, then runs `tools/gds-lvs.sh`. extraction/lvs reports are retained in `final_gds_lvs`. shell/yaml checks passed; actual extraction and compared device coverage remain pending until routed artifacts exist.
+
 physical silicon measurements and usb/ethernet electrical tests require hardware and are not supplied by this flow.
 
 ## intermediate evidence
