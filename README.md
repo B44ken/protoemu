@@ -74,13 +74,13 @@ make demo                    # independent ethernet peer and packet capture in /
 
 pipelinec and ghdl/yosys are needed for regeneration; the checked-in rtl supports simulation directly. `build/serial-program spi 0 32` and `build/serial-program i2c 300` emit custom timing images. mapped tests use `tools/gate-test.sh` with `NETLIST`, `CELL_MODELS`, `IVERILOGPATH`, `COCOTB_PYTHON`; set `PROTOEMU_GATE_PROFILE=1` for shorter uart/usb coverage.
 
-verification passed all 16 rtl integration tests, seven mapped spi/i²c/ethernet tests, 50,022 c-to-rtl comparisons, 30,960 usb codec cases and 432 ethernet codec cases. fifo order and acceptance are proved by unbounded induction; regenerated and checked-in cores are formally equivalent across all 87 output bits. the [independent ethernet demo](demo/README.md) exchanges arp and maximum-size udp frames through the actual host pins in simulation. packet captures are decoded with tcpdump.
+verification passed all 16 rtl integration tests and 16 native clock-gated mapped tests, 50,022 c-to-rtl comparisons, 30,960 usb codec cases and 432 ethernet codec cases. fifo order and acceptance are proved by unbounded induction; regenerated and checked-in cores are formally equivalent across all 87 output bits. the [independent ethernet demo](demo/README.md) exchanges arp and maximum-size udp frames through the actual host pins in simulation. packet captures are decoded with tcpdump.
 
 ## implementation limits
 
 this is a host-streamed protocol engine. ethernet implements digital frame transmit and sampled receive with a c decoder; an external front end must convert the logic waveform to/from the cable's differential signal. link pulses, negotiation, collision handling and a standalone mac are not implemented. usb likewise needs a validated electrical interface and the low-speed d− pull-up.
 
-the expanded hardware maps to 458,297 µm², about 51% of the available cell rows. pre-route setup slack at 60 mhz is +10.56 ns nominal and +7.26 ns at the slow corner, with an ideal clock and no wire parasitics. the latest saved report is `reports/protocols.json`; `reports/first-pass.json` preserves the earlier uart/usb result. full placement/routing, extracted timing, drc/lvs and cable electrical compliance remain unverified.
+the original hardware maps to 458,297 µm², about 51% of the available cell rows. pre-route setup slack at 60 mhz is +10.56 ns nominal and +7.26 ns at the slow corner, with an ideal clock and no wire parasitics. `reports/protocols.json` records that mapping; `reports/first-pass.json` preserves the earlier uart/usb result. the current configuration gates instruction-memory words: a [native comparison](reports/clock-gating.md) reduced synthesized area by 16.26% and passed all 16 mapped integration tests. both versions still require completed routing, extracted timing and drc/lvs; cable electrical compliance also remains unverified.
 
 ## physical build
 

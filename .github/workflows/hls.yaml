@@ -50,6 +50,7 @@ jobs:
         with:
           name: verification
           path: |
+            build/regenerated-engine.v
             build/core-equivalence.log
             build/verification/*.log
             build/verification/*.ys

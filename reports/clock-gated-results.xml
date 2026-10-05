@@ -1,0 +1,21 @@
+<testsuites name="results">
+  <testsuite name="all" package="all">
+    <property name="random_seed" value="1791175083" />
+    <testcase name="uart_duplex" classname="test" file="/private/tmp/protoemu-clockgate/snapshot/test/test.py" lineno="134" time="22.96009111404419" sim_time_ns="1502374.939905" ratio_time="65434.188934295205" />
+    <testcase name="usb_transmit" classname="test" file="/private/tmp/protoemu-clockgate/snapshot/test/test.py" lineno="196" time="2.8179080486297607" sim_time_ns="157108.3270490002" ratio_time="55753.532172703744" />
+    <testcase name="usb_receive" classname="test" file="/private/tmp/protoemu-clockgate/snapshot/test/test.py" lineno="222" time="3.1221210956573486" sim_time_ns="155891.66043100017" ratio_time="49931.33054570962" />
+    <testcase name="faults_and_reprogramming" classname="test" file="/private/tmp/protoemu-clockgate/snapshot/test/test.py" lineno="248" time="0.8672120571136475" sim_time_ns="117608.32862899988" ratio_time="135616.57459011482" />
+    <testcase name="uart_bad_stop_and_break" classname="test_errors" file="/private/tmp/protoemu-clockgate/snapshot/test/test_errors.py" lineno="17" time="2.534634828567505" sim_time_ns="297824.9880870001" ratio_time="117502.12879987975" />
+    <testcase name="uart_receive_phase_and_skew" classname="test_errors" file="/private/tmp/protoemu-clockgate/snapshot/test/test_errors.py" lineno="39" time="37.19749712944031" sim_time_ns="2487858.233819" ratio_time="66882.40945786542" />
+    <testcase name="usb_receive_phase_and_frequency" classname="test_errors" file="/private/tmp/protoemu-clockgate/snapshot/test/test_errors.py" lineno="64" time="21.675355911254883" sim_time_ns="434508.3159529995" ratio_time="20046.19060152927" />
+    <testcase name="spi_modes" classname="test_serial" file="/private/tmp/protoemu-clockgate/snapshot/test/test_serial.py" lineno="46" time="28.09484314918518" sim_time_ns="893591.6309230002" ratio_time="31806.250925765235" />
+    <testcase name="i2c_write_restart_read" classname="test_serial" file="/private/tmp/protoemu-clockgate/snapshot/test/test_serial.py" lineno="165" time="16.167611122131348" sim_time_ns="1085458.289915" ratio_time="67137.82770474665" />
+    <testcase name="i2c_nack" classname="test_serial" file="/private/tmp/protoemu-clockgate/snapshot/test/test_serial.py" lineno="212" time="5.382955074310303" sim_time_ns="233824.99064700026" ratio_time="43438.034949039466" />
+    <testcase name="i2c_arbitration" classname="test_serial" file="/private/tmp/protoemu-clockgate/snapshot/test/test_serial.py" lineno="236" time="1.7984778881072998" sim_time_ns="152758.32722300012" ratio_time="84937.56205352153" />
+    <testcase name="ethernet_transmit" classname="test_ethernet" file="/private/tmp/protoemu-clockgate/snapshot/test/test_ethernet.py" lineno="34" time="17.001527786254883" sim_time_ns="353491.6525269998" ratio_time="20791.758068518113" />
+    <testcase name="ethernet_receive" classname="test_ethernet" file="/private/tmp/protoemu-clockgate/snapshot/test/test_ethernet.py" lineno="82" time="10.197683095932007" sim_time_ns="166074.99335700087" ratio_time="16285.56131767327" />
+    <testcase name="ethernet_fifo_faults" classname="test_ethernet" file="/private/tmp/protoemu-clockgate/snapshot/test/test_ethernet.py" lineno="116" time="1.6814079284667969" sim_time_ns="213708.32478500064" ratio_time="127100.81900224654" />
+    <testcase name="asynchronous_host_fifo_boundaries" classname="test_verification" file="/private/tmp/protoemu-clockgate/snapshot/test/test_verification.py" lineno="33" time="0.4899418354034424" sim_time_ns="22324.999107000418" ratio_time="45566.631574984625" />
+    <testcase name="maximum_delay_and_global_reset" classname="test_verification" file="/private/tmp/protoemu-clockgate/snapshot/test/test_verification.py" lineno="66" time="1.2304959297180176" sim_time_ns="145824.99416700006" ratio_time="118509.12355347454" />
+  </testsuite>
+</testsuites>

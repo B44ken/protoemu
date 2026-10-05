@@ -15,6 +15,6 @@ audited completed logs and downloaded test artifacts on 2026-10-05 utc. both run
 
 hls tools observed: pipelinec `ab93e524494fb47d3d6926b76c09333a150a10ba`; python 3.13.7; ghdl 6.0.0 `e589c698c`; gnu cpp 13.3.0 (`13.3.0-6ubuntu2~24.04.1`); oss cad suite 2026-10-01, yosys 0.69+173 `53f1cdd34-dirty`. both pinned archive sha256 checks passed. test tools: python setup 3.11.16, icarus 12.0, cocotb 2.0.1, scapy 2.8.0, cocotbext-eth 0.1.28.
 
-the hls log retains the complete core proof; the fifo step redirects detailed solver output locally, so its public log contains the successful checked subprocess result. the fifo proof command at this head uses `sat -verify -prove correct 1 -set legal 1 -seq 1 -tempinduct -maxsteps 4 -set-def-inputs`.
+[follow-up hls run 37262054306](https://github.com/B44ken/protoemu/actions/runs/37262054306) passed at `0d7e2f0a7fe035195a252cdb6b2d75ad9ff96705`, with unchanged rtl. its [verification artifact](https://github.com/B44ken/protoemu/actions/runs/37262054306/artifacts/11324489041) retains complete core/fifo/structure logs and the exact proof scripts. downloaded scripts match this checkout. the core proof has no input constraints; fifo base and induction steps both succeed. fifo uses `sat -verify -prove correct 1 -set legal 1 -seq 1 -tempinduct -maxsteps 4 -set-def-inputs`, with reset required only on the first cycle.
 
 these checks validate rtl simulation and formal behavior. the ethernet artifact records physical validation as pending.

@@ -1,0 +1,22 @@
+native icarus 13 gate-test tools, 2026-10-05
+
+IVERILOGPATH=/tmp/protoemu-iverilog13/install/bin
+CELL_MODELS=/tmp/protoemu-iverilog13/models
+source: https://github.com/TinyTapeout/iverilog/tree/dfeee909ed9f20b4870dd93423156c0170c0e1ff
+official v13.0 tag: dfeee909ed9f20b4870dd93423156c0170c0e1ff
+native iverilog/vvp: 13.0 (stable) (dfeee90-dirty), mach-o arm64
+linux release binary marker: 13.0 (stable) (v13_0-dirty)
+linux release deb sha256: 888bca6b06289ea8b55368d43db38dc88932938319ab40d45a763ce5114e8505
+the deb description names unresolvable 30a7d1a1; official release/tag names dfeee909.
+dirty native marker reflects generated configure/gperf files; no manual source patch.
+
+apple clang 17.0.0 (clang-1700.3.19.1); bison 3.8.2; flex 2.6.4; autoconf 2.73; gperf 3.3.
+build: sh autoconf.sh; ./configure --prefix=/tmp/protoemu-iverilog13/install CPPFLAGS='-include mach-o/dyld.h'; make -j10; make check; make install
+the compiler includes the real macos sdk header for the release driver's omitted _NSGetExecutablePath declaration.
+
+unmodified pdk models: IHP-GmbH/IHP-Open-PDK 2bbec755dc67ca3db0261c3d6163e15735d66710
+stdcell sha256: b0adbc84c8f78feb01c3d8d9d55e9818ee6502347d336f3a1f846e6a5d64e0a2
+udp sha256: 5491a3edf7468792b5222e7abe057e0583a407c01b2086d4fd44a55b6cf88055
+make check: upstream hello-world smoke test passed; cmos5l dfrbp_1 reset/capture/hold model test passed.
+model flags: -g2012 -DFUNCTIONAL -DSIM -gspecify.
+unsupported timing checks/edge-sensitive ifnone paths remain reported; functional gate testing only.

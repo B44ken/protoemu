@@ -19,6 +19,11 @@
   "//": "The value is in nanoseconds, so 20ns == 50MHz.",
   "CLOCK_PERIOD": 16.666667,
 
+  "//": "gate each instruction-memory word with the characterized pdk cell",
+  "SYNTH_CLOCKGATE_MIN_WIDTH": 32,
+  "SYNTH_CLOCKGATE_POSEDGE_ICG": "sg13cmos5l_lgcp_1/GATE/CLK/GCLK",
+  "STA_EXTRA_CORNER_TCL_FILE": "dir::../tools/clock-checks.tcl",
+
   "//": "require setup timing at every characterized corner",
   "TIMING_VIOLATION_CORNERS": ["*"],
 

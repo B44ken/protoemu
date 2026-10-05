@@ -44,3 +44,9 @@ precheck runs nine cmos5l checks: pin-label overlap, foundry drc, zero area, lay
 final-gds lvs follow-up uses the supported librelane cli: `--from Magic.SpiceExtraction --to Checker.LVS --override-config MAGIC_EXT_USE_GDS=true`, initialized with the exact gds, routed def and powered netlist. it reuses completed routing.
 
 physical silicon measurements and usb/ethernet electrical tests require hardware and are not supplied by this flow.
+
+## intermediate evidence
+
+at 2026-10-05 03:27:18 utc, [step 37, post-cts timing repair](https://github.com/B44ken/protoemu/actions/runs/37258898939/job/111601700921#step:3:8167) reported 37,689 cells and 614,098.20 um², about 68% of the available cell rows. this includes 446 clock buffers and 9,052 timing repair buffers. the same area appeared after global routing at 03:27:54 utc. these are intermediate measurements, not extracted sign-off; detailed routing is still optimizing.
+
+the timestamped cell-type lines are retained in [physical-intermediate.md](physical-intermediate.md).
