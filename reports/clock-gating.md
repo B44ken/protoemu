@@ -11,7 +11,7 @@ area decreased by 74,494.0476 um² (16.26%). both retain 4,649 flops. 128 real `
 
 the comparison uses `tools/synth.py`, with `clockgate -min_net_size 32 -pos sg13cmos5l_lgcp_1 GATE:CLK:GCLK` inserted before `dfflibmap` in the candidate. the pdk exclusions remain. [librelane's documented variables](https://github.com/librelane/librelane/blob/ca6adb1e2982cd75445a68b632d461213d8ca421/librelane/steps/pyosys.py#L197) apply that same pass in the official flow. [maintainer guidance](https://github.com/librelane/librelane/issues/934#issuecomment-4581962227) explains why explicit clock-gate mapping works with the ihp exclusions.
 
-tools: native yosys `0.69+post`, source `143eb14f9cc55d6f8927e68523b0c9d2166ed02c`; icarus 13.0 `dfeee909ed9f20b4870dd93423156c0170c0e1ff`; cocotb 2.0.1; python 3.12.13. unmodified models and typ liberty use pdk `2bbec755dc67ca3db0261c3d6163e15735d66710`. native yosys differs from the official flow's declared v0.66. simulator timing-check warnings remain; these are functional tests.
+tools: native yosys `0.69+post`, source `143eb14f9cc55d6f8927e68523b0c9d2166ed02c`; icarus 13.0 `dfeee909ed9f20b4870dd93423156c0170c0e1ff`; cocotb 2.0.1; cli python 3.12.13 and cocotb embedded python 3.12.10. unmodified models and typ liberty use pdk `2bbec755dc67ca3db0261c3d6163e15735d66710`. native yosys differs from the official flow's declared v0.66. simulator timing-check warnings remain; these are functional tests.
 
 mapped netlist sha256: original `a03a8ace2fb1e235c90061b843ac4b8a5a840491b05c19063763418216ccf2e2`; gated `2d711f959ce672e948458536f93d714ee7dea61505badca262e24d06b18febf0`.
 
