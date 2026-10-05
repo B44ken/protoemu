@@ -16,7 +16,7 @@ cat > "$work/Makefile" <<'MAKE'
 SIM = icarus
 TOPLEVEL_LANG = verilog
 COCOTB_TOPLEVEL = tb
-COCOTB_TEST_MODULES = test,test_errors,test_serial,test_ethernet
+COCOTB_TEST_MODULES = test,test_errors,test_serial,test_ethernet,test_verification
 VERILOG_SOURCES = $(CURDIR)/snapshot/test/tb.v $(CURDIR)/mapped.v $(CURDIR)/cells/sg13cmos5l_stdcell.v $(CURDIR)/cells/sg13cmos5l_udp.v
 COMPILE_ARGS += -DFUNCTIONAL -DGL_TEST -DSIM -gspecify
 SIM_BUILD = $(CURDIR)/sim_build

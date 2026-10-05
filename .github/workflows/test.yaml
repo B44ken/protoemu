@@ -11,7 +11,7 @@ jobs:
 
       - name: Install compilers and codec dependencies
         shell: bash
-        run: sudo apt-get update && sudo apt-get install -y iverilog clang zlib1g-dev
+        run: sudo apt-get update && sudo apt-get install -y iverilog clang zlib1g-dev tcpdump
 
       # Set Python up and install cocotb
       - name: Setup python
@@ -21,7 +21,7 @@ jobs:
 
       - name: Install Python packages
         shell: bash
-        run: pip install -r test/requirements.txt
+        run: pip install -r test/requirements.txt -r demo/requirements.txt
 
       - name: Run tests
         run: |
@@ -33,6 +33,9 @@ jobs:
           assert results.findall('.//testcase')
           assert not results.findall('.//failure') and not results.findall('.//error')
           PY
+
+      - name: Run independent ethernet peer demo
+        run: python demo/run.py --output build/demo
 
       - name: Test Summary
         uses: test-summary/action@v2.4
@@ -49,3 +52,7 @@ jobs:
             test/tb.fst
             test/results.xml
             test/output/*
+            build/demo/result.json
+            build/demo/results.xml
+            build/demo/ethernet.pcap
+            build/demo/tcpdump.txt

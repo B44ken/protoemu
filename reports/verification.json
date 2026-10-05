@@ -1,0 +1,30 @@
+{
+  "rtl_sha256": {
+    "project.v": "ccf54afe7b7d081869882b148b84f511b50a200f880bcc7e9a7c953d538cfa76",
+    "fifo.v": "36e764792750c0263b0433da0368e208170175960783328fbf8206720a1cb8c0",
+    "engine.v": "235fec94c255703db0edd64f035fcb6ed8e88be7c97af2a1072f99dd513dc2f7",
+    "engine_wrap.v": "fd6109b89a5cca8eb118fa1c1c3af2a0f1a91bae29c0a6c0ba3f260eeab83875"
+  },
+  "structure": {
+    "hierarchy": "pass",
+    "driver_checks": "pass",
+    "latches": 0,
+    "asynchronous_registers": 0,
+    "clock": "single positive-edge clk",
+    "uio_synchronizers": "two stages; first stage feeds only second stage"
+  },
+  "fifo": {
+    "proof": "unbounded temporal induction",
+    "first_cycle_reset": true,
+    "subsequent_inputs": "unconstrained reset/push/pop/data",
+    "checked": [
+      "data order",
+      "occupancy",
+      "ready",
+      "valid",
+      "simultaneous push/pop",
+      "full/empty rejection",
+      "pointer wrap"
+    ]
+  }
+}

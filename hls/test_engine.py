@@ -3,9 +3,11 @@ import ctypes as c
 from pathlib import Path
 import random
 import subprocess
+import sys
 import tempfile
 
 root = Path(__file__).resolve().parents[1]
+rtl = Path(sys.argv[1]).resolve() if len(sys.argv) > 1 else root / "src/engine.v"
 state_fields = [("pc", 7), *[(n, 8) for n in ("x", "y", "osr", "isr", "pins", "oe")],
                 ("delay", 12), ("isr_count", 4), ("halted", 1), ("fault", 1), ("osr_count", 4)]
 input_fields = [("instr", 32), ("pins", 8), ("tx_valid", 1), ("tx_data", 8),
@@ -139,5 +141,5 @@ endmodule
 """.replace("PORTS", ",\n".join(ports))
     (build / "test.v").write_text(bench)
     subprocess.run(["iverilog", "-g2012", "-s", "test", "-o", str(build / "test.vvp"),
-                    str(root / "src/engine.v"), str(build / "test.v")], check=True)
+                    str(rtl), str(build / "test.v")], check=True)
     subprocess.run(["vvp", str(build / "test.vvp")], cwd=build, check=True)

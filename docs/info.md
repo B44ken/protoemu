@@ -12,6 +12,8 @@ from the repository, `make test` checks c codecs, c-to-rtl comparisons and integ
 
 host data is ui[7:0], read data uo[7:0], write strobe uio[6] and command/data uio[7]. allow four clocks each of setup, high and low. control bits 1:0 run the engines, bit 2 enables streaming and bit 7 flushes fifos. stream mode reserves uio[5] for the selected fifo's ready signal; other protocol pins remain available. keep engines' output-enable masks disjoint.
 
+reset is synchronous and active low. keep the clock running and host strobe low, hold rst_n low for five clocks, then wait five clocks after release. uploaded instructions are retained; control and fifo state reset.
+
 ethernet requires continuous host service: 2.5 million bytes/s tx or 3.75 million bytes/s rx. both directions together exceed the 5 million bytes/s host interface. starvation/overflow faults halt an engine; stopping clears its state.
 
 ## external hardware

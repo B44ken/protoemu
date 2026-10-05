@@ -3,7 +3,7 @@ PYTHON ?= python3
 TEST_ENV ?= /tmp/protoemu-test-env
 CFLAGS = -std=c11 -O2 -Wall -Wextra -Werror
 
-.PHONY: test test-c test-core test-rtl test-env programs hls synth clean
+.PHONY: test test-c test-core test-rtl test-env programs hls synth verify demo clean
 
 test: test-c test-core test-rtl
 
@@ -60,6 +60,13 @@ hls:
 
 synth:
 	$(PYTHON) tools/synth.py
+
+verify:
+	$(PYTHON) tools/verify.py
+
+demo: test-env
+	uv pip install --python $(TEST_ENV)/bin/python -r demo/requirements.txt
+	$(TEST_ENV)/bin/python demo/run.py --output /tmp/protoemu-demo
 
 clean:
 	rm -rf build test/sim_build test/__pycache__

@@ -1,0 +1,21 @@
+<testsuites name="results">
+  <testsuite name="all" package="all">
+    <property name="random_seed" value="1791171052" />
+    <testcase name="uart_duplex" classname="test" file="/Users/brad/git/protoemu/test/test.py" lineno="134" time="40.03357291221619" sim_time_ns="22343190.772939" ratio_time="558111.3337531012" />
+    <testcase name="usb_transmit" classname="test" file="/Users/brad/git/protoemu/test/test.py" lineno="196" time="0.3148529529571533" sim_time_ns="157108.32704900205" ratio_time="498989.5301073517" />
+    <testcase name="usb_receive" classname="test" file="/Users/brad/git/protoemu/test/test.py" lineno="222" time="0.3084580898284912" sim_time_ns="155891.66043100134" ratio_time="505390.0856277758" />
+    <testcase name="faults_and_reprogramming" classname="test" file="/Users/brad/git/protoemu/test/test.py" lineno="248" time="0.2068626880645752" sim_time_ns="117608.32862900198" ratio_time="568533.3093626281" />
+    <testcase name="uart_bad_stop_and_break" classname="test_errors" file="/Users/brad/git/protoemu/test/test_errors.py" lineno="17" time="0.49556612968444824" sim_time_ns="297824.9880870022" ratio_time="600979.3047733958" />
+    <testcase name="uart_receive_phase_and_skew" classname="test_errors" file="/Users/brad/git/protoemu/test/test_errors.py" lineno="39" time="8.654468059539795" sim_time_ns="4072008.170453001" ratio_time="470509.35336972424" />
+    <testcase name="usb_receive_phase_and_frequency" classname="test_errors" file="/Users/brad/git/protoemu/test/test_errors.py" lineno="64" time="11.058816909790039" sim_time_ns="4506358.153078999" ratio_time="407490.0769077437" />
+    <testcase name="spi_modes" classname="test_serial" file="/Users/brad/git/protoemu/test/test_serial.py" lineno="46" time="2.0325331687927246" sim_time_ns="893591.6309229992" ratio_time="439644.3042815242" />
+    <testcase name="i2c_write_restart_read" classname="test_serial" file="/Users/brad/git/protoemu/test/test_serial.py" lineno="165" time="4.8836517333984375" sim_time_ns="1085458.2899149954" ratio_time="222263.6562086802" />
+    <testcase name="i2c_nack" classname="test_serial" file="/Users/brad/git/protoemu/test/test_serial.py" lineno="212" time="0.5842349529266357" sim_time_ns="233824.9906469956" ratio_time="400224.24107918405" />
+    <testcase name="i2c_arbitration" classname="test_serial" file="/Users/brad/git/protoemu/test/test_serial.py" lineno="236" time="0.3245837688446045" sim_time_ns="152758.3272230029" ratio_time="470628.361260222" />
+    <testcase name="ethernet_transmit" classname="test_ethernet" file="/Users/brad/git/protoemu/test/test_ethernet.py" lineno="34" time="4.21320915222168" sim_time_ns="1516691.6059990004" ratio_time="359984.88354161795" />
+    <testcase name="ethernet_receive" classname="test_ethernet" file="/Users/brad/git/protoemu/test/test_ethernet.py" lineno="82" time="3.9073450565338135" sim_time_ns="1495508.2735130042" ratio_time="382742.82201215735" />
+    <testcase name="ethernet_fifo_faults" classname="test_ethernet" file="/Users/brad/git/protoemu/test/test_ethernet.py" lineno="116" time="0.3353910446166992" sim_time_ns="213708.32478500158" ratio_time="637191.5059009329" />
+    <testcase name="asynchronous_host_fifo_boundaries" classname="test_verification" file="/Users/brad/git/protoemu/test/test_verification.py" lineno="33" time="0.03338003158569336" sim_time_ns="22341.665772996843" ratio_time="669312.3017466662" />
+    <testcase name="maximum_delay_and_global_reset" classname="test_verification" file="/Users/brad/git/protoemu/test/test_verification.py" lineno="66" time="0.23810720443725586" sim_time_ns="145824.99416700006" ratio_time="612434.1953938094" />
+  </testsuite>
+</testsuites>

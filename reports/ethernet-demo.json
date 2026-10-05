@@ -1,0 +1,21 @@
+{
+  "backend": "rtl simulation",
+  "physical_validation": "pending",
+  "clock_hz": 60000000,
+  "peer_period_offset_ppm": 100,
+  "frames": 4,
+  "frame_bytes": [
+    60,
+    60,
+    1514,
+    1514
+  ],
+  "preamble_sfd_fcs": "pass",
+  "arp_request_reply": "pass",
+  "maximum_size_udp_echo": "pass",
+  "host_fifo_faults": 0,
+  "peer_models": [
+    "scapy 2.8.0",
+    "cocotbext-eth 0.1.28"
+  ]
+}

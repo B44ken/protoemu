@@ -4,7 +4,7 @@
 
 a c/hls first pass at the [jane street protocol emulator competition](https://blog.janestreet.com/protocol-emulator-asic-competition/), targeting 24 tiny tapeout ihp tiles (6×4) and a fixed 60 mhz clock.
 
-two engines share 128 writable 32-bit instructions. each has byte shift/scratch registers, pin outputs/enables, cycle delays and eight-byte transmit/receive fifos. input pins pass through two synchronizers. an instruction takes one clock plus its delay.
+an engine is a tiny hardware interpreter that executes uploaded instructions to drive and sample pins. two engines share 128 writable 32-bit instructions, so transmit and receive can keep independent timing. each has byte shift/scratch registers, pin outputs/enables, cycle delays and eight-byte transmit/receive fifos. input pins pass through two synchronizers. an instruction takes one clock plus its delay. spi and i²c each use one engine.
 
 `hls/engine.c` describes the hardware next-state function. pipelinec generates the checked-in verilog; a small wrapper supplies registers, program memory, fifos and host access. the c firmware emits explicit engine instructions; arbitrary c does not compile into microcode.
 
@@ -42,6 +42,8 @@ prefill tx, enable stream mode and engine 0 (`control = 5`), then keep feeding t
 
 `ui[7:0]` carries write data; `uo[7:0]` reads the selected register. `uio[6]` is a rising-edge write strobe and `uio[7]` selects command (1) or data (0). a command selects a register; subsequent data strobes write it. hold data/command stable for four clocks before asserting the strobe, four clocks high and four clocks low. normally `uio[5:0]` are protocol pins.
 
+reset is synchronous and active low. keep the clock running and the host strobe low; hold `rst_n` low for five clocks, then wait five clocks after release before sending commands. reset retains uploaded instructions and clears control/fifo state.
+
 | register | read | write |
 | --- | --- | --- |
 | `0x00` | run bits 1:0, stream bit 2 | run engines; bit 2 enables streaming; bit 7 flushes all fifos/host overrun flags |
@@ -66,11 +68,13 @@ make test                    # codecs, c/rtl comparison, host-to-pin integration
 make programs                # uart/usb, four spi modes, i²c and ethernet images
 make synth LIBERTY=/path/to/cells.lib
 make hls                     # regenerate rtl; see hls/README.md for dependencies
+make verify                  # rtl structure and unbounded fifo proof; requires yosys
+make demo                    # independent ethernet peer and packet capture in /tmp
 ```
 
 pipelinec and ghdl/yosys are needed for regeneration; the checked-in rtl supports simulation directly. `build/serial-program spi 0 32` and `build/serial-program i2c 300` emit custom timing images. mapped tests use `tools/gate-test.sh` with `NETLIST`, `CELL_MODELS`, `IVERILOGPATH`, `COCOTB_PYTHON`; set `PROTOEMU_GATE_PROFILE=1` for shorter uart/usb coverage.
 
-verification passed all 14 rtl integration tests, seven mapped spi/i²c/ethernet tests, 50,022 c-to-rtl comparisons, 30,960 usb codec cases and 432 ethernet codec cases. the current generated core and synthesis snapshot are formally equivalent across all 87 output bits.
+verification passed all 16 rtl integration tests, seven mapped spi/i²c/ethernet tests, 50,022 c-to-rtl comparisons, 30,960 usb codec cases and 432 ethernet codec cases. fifo order and acceptance are proved by unbounded induction; regenerated and checked-in cores are formally equivalent across all 87 output bits. the [independent ethernet demo](demo/README.md) exchanges arp and maximum-size udp frames through the actual host pins in simulation. packet captures are decoded with tcpdump.
 
 ## implementation limits
 

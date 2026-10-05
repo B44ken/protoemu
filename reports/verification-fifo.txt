@@ -1,0 +1,4 @@
+** Trying induction with length 1 **
+Base case for induction length 1 proven.
+[induction step 1] Solving problem with 46385 variables and 126909 clauses..
+Induction step proven: SUCCESS!

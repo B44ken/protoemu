@@ -8,6 +8,7 @@ python=${HLS_PYTHON:-"$tool_dir/venv/bin/python"}
 ghdl=${GHDL:-ghdl}
 cpp=${CPP:-cpp}
 build=${HLS_BUILD:-"$root/build/hls"}
+output=${HLS_OUTPUT:-"$root/src/engine.v"}
 revision=ab93e524494fb47d3d6926b76c09333a150a10ba
 
 mkdir -p "$build/bin"
@@ -33,5 +34,5 @@ with (build / "engine.v").open("w") as output:
                    stdout=output, check=True)
 PY
 
-yosys -Q -T -p "read_verilog $build/engine.v; hierarchy -top engine_comb; proc; flatten; opt; clean -purge; write_verilog -noattr $root/src/engine.v"
-python3 "$root/hls/test_engine.py"
+yosys -Q -T -p "read_verilog $build/engine.v; hierarchy -top engine_comb; proc; flatten; opt; clean -purge; write_verilog -noattr $output"
+"$python" "$root/hls/test_engine.py" "$output"

@@ -20,8 +20,14 @@ tar -xzf /tmp/protoemu-hls/ghdl.tgz -C /tmp/protoemu-hls
 CPP=/opt/homebrew/bin/cpp-15 GHDL=/tmp/protoemu-hls/ghdl-llvm-6.0.0-macos15-aarch64/bin/ghdl make hls
 ```
 
-gnu cpp comes from homebrew's gcc package. apple's cpp preserves comments that this compiler frontend cannot parse. on linux use the platform's gnu cpp and ghdl binaries. `PIPELINEC_DIR`, `HLS_PYTHON`, `GHDL`, `CPP`, and `HLS_BUILD` select other tool/build locations.
+gnu cpp comes from homebrew's gcc package. apple's cpp preserves comments that this compiler frontend cannot parse. on linux use the platform's gnu cpp and ghdl binaries. `PIPELINEC_DIR`, `HLS_PYTHON`, `GHDL`, `CPP`, and `HLS_BUILD` select other tool/build locations. `HLS_OUTPUT` selects the regenerated rtl path; its default is `src/engine.v`.
+
+the `hls` workflow uses python 3.13.7, gnu cpp 13, ghdl 6.0.0 and oss cad suite 2026-10-01. github actions and pipelinec are pinned by commit; tool archives are checked against their published sha256 digests. it regenerates a separate rtl file, runs the c comparison, then uses yosys's native miter and sat proof to compare all 87 output bits for every possible input and state. to run that last proof locally:
+
+```sh
+./tools/formal-hls.sh src/engine.v /tmp/protoemu-hls/regenerated-engine.v
+```
 
 `test_engine.py` compiles the same c source and compares it with generated rtl over 50,000 random cases and 22 explicit refill/output/starvation cases. integrated protocol tests additionally exercise the registered engines through the chip's host interface.
 
-references: [pipelinec cycle semantics](https://github.com/JulianKemmerer/PipelineC/wiki/Dev-Board-Setup), [pipelinec tool setup](https://github.com/JulianKemmerer/PipelineC/wiki/Running-the-Tool), [ghdl synthesis](https://ghdl.github.io/ghdl/using/Synthesis.html).
+references: [pipelinec cycle semantics](https://github.com/JulianKemmerer/PipelineC/wiki/Dev-Board-Setup), [pipelinec tool setup](https://github.com/JulianKemmerer/PipelineC/wiki/Running-the-Tool), [ghdl synthesis](https://ghdl.github.io/ghdl/using/Synthesis.html), [yosys miter](https://github.com/YosysHQ/yosys/blob/main/passes/sat/miter.cc), [yosys sat](https://github.com/YosysHQ/yosys/blob/main/passes/sat/sat.cc).

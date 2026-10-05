@@ -1,0 +1,20 @@
+generated core equivalence, 2026-10-04
+
+pipelinec: ab93e524494fb47d3d6926b76c09333a150a10ba
+ghdl: 6.0.0, e589c698c, llvm macos15 aarch64
+ghdl archive sha256: 69beb5913a490b5971980bd045af6a63b6f52e861b444fa990bffac436587478
+gnu cpp: 15.2.0
+yosys: 0.69+post, 143eb14f9cc55d6f8927e68523b0c9d2166ed02c
+python: 3.13.7; pycparser 3.0; pyrtl 1.0.3; setuptools 84.0.0
+
+sha256 hls/engine.c: a7a151e348e8d7dad21124da6f85779adfe11c7bfc01b57d5c041b4f39626f38
+sha256 hls/engine.h: 082fd83c6147f84363efe3114f5268861d2b0a567e3058c4365efe197d280b4f
+sha256 src/engine.v: 235fec94c255703db0edd64f035fcb6ed8e88be7c97af2a1072f99dd513dc2f7
+sha256 regenerated rtl: 02ff19332360b5c690f30db647f460aca81f87ee37b2c75fb611af3d9ab42043
+
+c/rtl simulation: 50,022 comparisons passed on regenerated rtl.
+formal: tools/formal-hls.sh src/engine.v /tmp/protoemu-hls/regenerated-engine.v
+native yosys miter compares all 87 output bits for all input/state values:
+state[76:0], tx_pop, rx_push, rx_data[7:0].
+sat -verify -prove trigger 0: no model found; proof succeeded.
+87 separate single-output-bit mutations all failed the proof as expected.

@@ -1,0 +1,6 @@
+{
+  "availability": "user confirmed no fpga board available",
+  "physical_interoperability": "pending",
+  "simulation_demo": "reports/ethernet-demo.json",
+  "bring_up": "demo/README.md"
+}

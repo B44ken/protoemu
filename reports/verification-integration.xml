@@ -1,0 +1,7 @@
+<testsuites name="results">
+  <testsuite name="all" package="all">
+    <property name="random_seed" value="1791170718" />
+    <testcase name="asynchronous_host_fifo_boundaries" classname="test_verification" file="/Users/brad/git/protoemu/test/test_verification.py" lineno="33" time="0.0766451358795166" sim_time_ns="22308.332441" ratio_time="291059.98945670726" />
+    <testcase name="maximum_delay_and_global_reset" classname="test_verification" file="/Users/brad/git/protoemu/test/test_verification.py" lineno="66" time="0.5656867027282715" sim_time_ns="145824.994167" ratio_time="257784.02331837604" />
+  </testsuite>
+</testsuites>

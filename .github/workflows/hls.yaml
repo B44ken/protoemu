@@ -1,0 +1,45 @@
+name: hls
+on: [push, pull_request, workflow_dispatch]
+
+permissions:
+  contents: read
+
+jobs:
+  regenerate:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+        with:
+          repository: JulianKemmerer/PipelineC
+          ref: ab93e524494fb47d3d6926b76c09333a150a10ba
+          path: build/PipelineC
+      - uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1 # v6
+        with:
+          python-version: '3.13.7'
+      - name: install pinned tools
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y cpp-13 clang-18
+          python -m venv build/venv
+          build/venv/bin/pip install -r hls/requirements.txt
+          curl -fL https://github.com/ghdl/ghdl/releases/download/v6.0.0/ghdl-mcode-6.0.0-ubuntu24.04-x86_64.tar.gz -o build/ghdl.tgz
+          echo '30d6a977b8456d140bbafecbbe64b1947a3d92eeae8f5e6d9f528a174f9566e7  build/ghdl.tgz' | sha256sum -c -
+          tar -xzf build/ghdl.tgz -C build
+          curl -fL https://github.com/YosysHQ/oss-cad-suite-build/releases/download/2026-10-01/oss-cad-suite-linux-x64-20261001.tgz -o build/oss-cad-suite.tgz
+          echo '1c91249e9671666b58d94e2fe8a81e6103d37b254eab77bd82625802c208bf4d  build/oss-cad-suite.tgz' | sha256sum -c -
+          tar -xzf build/oss-cad-suite.tgz -C build
+      - name: regenerate and compare all 87 outputs
+        run: |
+          export PATH="$PWD/build/oss-cad-suite/bin:$PATH"
+          export PIPELINEC_DIR="$PWD/build/PipelineC" HLS_PYTHON="$PWD/build/venv/bin/python"
+          export GHDL="$PWD/build/ghdl-mcode-6.0.0-ubuntu24.04-x86_64/bin/ghdl"
+          export CPP=cpp-13
+          export HLS_OUTPUT="$PWD/build/regenerated-engine.v"
+          yosys -V
+          "$GHDL" --version
+          "$CPP" --version
+          ./tools/hls.sh
+          ./tools/formal-hls.sh src/engine.v "$HLS_OUTPUT"
+      - name: prove fifo behavior and check rtl structure
+        run: PATH="$PWD/build/oss-cad-suite/bin:$PATH" make verify

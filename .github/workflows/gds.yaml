@@ -2,6 +2,9 @@ name: gds
 
 on:
   push:
+    paths:
+      - "src/**"
+      - "info.yaml"
   workflow_dispatch:
 
 jobs:
