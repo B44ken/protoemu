@@ -1,0 +1,66 @@
+{
+  "run_id": 37258898939,
+  "source_commit": "00aff9a7a26e86f5d067502fcc4c8b2f93e3cab4",
+  "conclusion": "failure",
+  "failure": "Checker.SetupViolations: nom_slow_1p08V_125C",
+  "artifact_id": 11330345136,
+  "artifact_digest": "sha256:38c6f83eeae7be701590cf73f1cb34a65c8e44447cc6a774f2b719b0c5f6af8f",
+  "artifact_expires_at": "2027-01-03T03:18:11Z",
+  "clock_period_ns": 16.666667,
+  "corners": {
+    "nom_fast_1p32V_m40C": {
+      "timing__setup__ws": 7.982216891177823,
+      "timing__setup__tns": 0,
+      "timing__setup_vio__count": 0,
+      "timing__hold__ws": 0.11671486329990044,
+      "timing__hold_vio__count": 0,
+      "design__max_slew_violation__count": 0,
+      "design__max_cap_violation__count": 1,
+      "timing__unannotated_net__count": 236,
+      "timing__unannotated_net_filtered__count": 0
+    },
+    "nom_slow_1p08V_125C": {
+      "timing__setup__ws": -4.670621355207096,
+      "timing__setup__tns": -806.0678965791697,
+      "timing__setup_vio__count": 330,
+      "timing__hold__ws": 0.6344911442502825,
+      "timing__hold_vio__count": 0,
+      "design__max_slew_violation__count": 42,
+      "design__max_cap_violation__count": 1,
+      "timing__unannotated_net__count": 236,
+      "timing__unannotated_net_filtered__count": 0
+    },
+    "nom_typ_1p20V_25C": {
+      "timing__setup__ws": 3.314900447963901,
+      "timing__setup__tns": 0,
+      "timing__setup_vio__count": 0,
+      "timing__hold__ws": 0.3046268878926734,
+      "timing__hold_vio__count": 0,
+      "design__max_slew_violation__count": 3,
+      "design__max_cap_violation__count": 1,
+      "timing__unannotated_net__count": 236,
+      "timing__unannotated_net_filtered__count": 0
+    }
+  },
+  "metrics": {
+    "design__instance__area__stdcell": 615394,
+    "route__drc_errors": 0,
+    "route__antenna_violation__count": 0,
+    "magic__drc_error__count": 0,
+    "design__lvs_error__count": 0,
+    "design__critical_disconnected_pin__count": 0,
+    "design__disconnected_pin__count": 1
+  },
+  "MAGIC_EXT_USE_GDS": false,
+  "sha256": {
+    "src/config_merged.json": "0c3f20983245cdb291b06acc936f5f894de4cfa250083fbf7c35bcc1b8565744",
+    "runs/wokwi/resolved.json": "69d046df398e04b1f063d0921944f2f73dc80a1c246e576fabf24bc069d193f9",
+    "runs/wokwi/final/metrics.json": "6a5e84f4a8544e83ea22123559ffdd17c003ca89b8827b71ef623f7953db77bd",
+    "runs/wokwi/final/nl/tt_um_protoemu.nl.v": "f524ff5da5311d1f05fdb4ee535677fa00aca5b157da53d08c939fe97c2c7bc0",
+    "runs/wokwi/final/pnl/tt_um_protoemu.pnl.v": "c397015be415ce264246546c6e8445933dc3122a2e80d5867ff63a7a357d4777",
+    "runs/wokwi/final/gds/tt_um_protoemu.gds": "58110b0ac6bbed049a5c7e967e55a3d5cb1f8facdddfdd26f2be1d578271a469",
+    "runs/wokwi/final/spef/nom/tt_um_protoemu.nom.spef": "d3048149004bfb4c6475f165075bcad40de157682040e48ed7a5ceb80aa90d2f",
+    "runs/wokwi/66-netgen-lvs/reports/lvs.netgen.rpt": "73ba2c3c6d9361f57eea3c21fe7887351c555979d10d77589e213c139cee7e9d",
+    "runs/wokwi/66-netgen-lvs/reports/lvs.netgen.json": "55f60d929eea6f51ef013eebbf45d4bc821abd81d378622f27212e2a0fe40180"
+  }
+}

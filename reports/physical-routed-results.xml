@@ -1,0 +1,21 @@
+<testsuites name="results">
+  <testsuite name="all" package="all">
+    <property name="random_seed" value="1791219376" />
+    <testcase name="uart_duplex" classname="test" file="/tmp/protoemu-ci-recovery/routed-gate/snapshot/test/test.py" lineno="134" time="242.31564688682556" sim_time_ns="1502374.939905" ratio_time="6200.073991122372" />
+    <testcase name="usb_transmit" classname="test" file="/tmp/protoemu-ci-recovery/routed-gate/snapshot/test/test.py" lineno="196" time="23.65462899208069" sim_time_ns="157108.3270490002" ratio_time="6641.75824112897" />
+    <testcase name="usb_receive" classname="test" file="/tmp/protoemu-ci-recovery/routed-gate/snapshot/test/test.py" lineno="222" time="18.69881319999695" sim_time_ns="155891.66043100017" ratio_time="8336.981538006145" />
+    <testcase name="faults_and_reprogramming" classname="test" file="/tmp/protoemu-ci-recovery/routed-gate/snapshot/test/test.py" lineno="248" time="8.344753980636597" sim_time_ns="117608.32862899988" ratio_time="14093.6843556924" />
+    <testcase name="uart_bad_stop_and_break" classname="test_errors" file="/tmp/protoemu-ci-recovery/routed-gate/snapshot/test/test_errors.py" lineno="17" time="18.080104112625122" sim_time_ns="297824.9880870001" ratio_time="16472.526166430227" />
+    <testcase name="uart_receive_phase_and_skew" classname="test_errors" file="/tmp/protoemu-ci-recovery/routed-gate/snapshot/test/test_errors.py" lineno="39" time="139.77531099319458" sim_time_ns="2487858.233819" ratio_time="17798.981924212134" />
+    <testcase name="usb_receive_phase_and_frequency" classname="test_errors" file="/tmp/protoemu-ci-recovery/routed-gate/snapshot/test/test_errors.py" lineno="64" time="41.42606735229492" sim_time_ns="434508.3159529995" ratio_time="10488.76573916275" />
+    <testcase name="spi_modes" classname="test_serial" file="/tmp/protoemu-ci-recovery/routed-gate/snapshot/test/test_serial.py" lineno="46" time="74.3488359451294" sim_time_ns="893591.6309230002" ratio_time="12018.905468573641" />
+    <testcase name="i2c_write_restart_read" classname="test_serial" file="/tmp/protoemu-ci-recovery/routed-gate/snapshot/test/test_serial.py" lineno="165" time="53.52423286437988" sim_time_ns="1085458.289915" ratio_time="20279.754268787798" />
+    <testcase name="i2c_nack" classname="test_serial" file="/tmp/protoemu-ci-recovery/routed-gate/snapshot/test/test_serial.py" lineno="212" time="11.24239993095398" sim_time_ns="233824.99064700026" ratio_time="20798.494279073286" />
+    <testcase name="i2c_arbitration" classname="test_serial" file="/tmp/protoemu-ci-recovery/routed-gate/snapshot/test/test_serial.py" lineno="236" time="9.19481372833252" sim_time_ns="152758.32722300012" ratio_time="16613.53146853828" />
+    <testcase name="ethernet_transmit" classname="test_ethernet" file="/tmp/protoemu-ci-recovery/routed-gate/snapshot/test/test_ethernet.py" lineno="34" time="45.14514780044556" sim_time_ns="353491.6525269998" ratio_time="7830.113971262956" />
+    <testcase name="ethernet_receive" classname="test_ethernet" file="/tmp/protoemu-ci-recovery/routed-gate/snapshot/test/test_ethernet.py" lineno="82" time="33.139458894729614" sim_time_ns="166074.99335700087" ratio_time="5011.397255596496" />
+    <testcase name="ethernet_fifo_faults" classname="test_ethernet" file="/tmp/protoemu-ci-recovery/routed-gate/snapshot/test/test_ethernet.py" lineno="116" time="10.855051040649414" sim_time_ns="213708.32478500064" ratio_time="19687.454622250705" />
+    <testcase name="asynchronous_host_fifo_boundaries" classname="test_verification" file="/tmp/protoemu-ci-recovery/routed-gate/snapshot/test/test_verification.py" lineno="33" time="1.5781688690185547" sim_time_ns="22424.999103000388" ratio_time="14209.505423172008" />
+    <testcase name="maximum_delay_and_global_reset" classname="test_verification" file="/tmp/protoemu-ci-recovery/routed-gate/snapshot/test/test_verification.py" lineno="66" time="6.002185106277466" sim_time_ns="145824.99416699912" ratio_time="24295.317719289615" />
+  </testsuite>
+</testsuites>

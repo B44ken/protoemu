@@ -1,0 +1,42 @@
+{
+  "source_run": 37258898939,
+  "source_commit": "00aff9a7a26e86f5d067502fcc4c8b2f93e3cab4",
+  "functional_rtl_matches_current": true,
+  "test_checkout_head": "e97bf3a",
+  "tests": 16,
+  "failures": 0,
+  "errors": 0,
+  "skipped": 0,
+  "gate_profile": "1",
+  "icarus": "13.0 dfeee909ed9f20b4870dd93423156c0170c0e1ff, native build",
+  "cocotb": "2.0.1",
+  "results_sha256": "c19f920fee278e7f1af81dd052e0cf28cd97b3c1e0df2ba77ce33676c1086cf9",
+  "netlist_sha256": "f524ff5da5311d1f05fdb4ee535677fa00aca5b157da53d08c939fe97c2c7bc0",
+  "models_sha256": {
+    "sg13cmos5l_udp.v": "5491a3edf7468792b5222e7abe057e0583a407c01b2086d4fd44a55b6cf88055",
+    "sg13cmos5l_stdcell.v": "b0adbc84c8f78feb01c3d8d9d55e9818ee6502347d336f3a1f846e6a5d64e0a2"
+  },
+  "snapshot_sha256": {
+    "firmware/test_usb.c": "3659babd0f76d68ae4acdedded6e5ed4660eaf901de169cd9a0bcc0708d26586",
+    "firmware/pio.h": "c0451870c1d143df632a3e36cda3f58ca66c67deef4492205caa59742f397f66",
+    "firmware/ethernet.c": "2094d17a736c53b52839e9982a5956e075ec093e485d1896331d940d3553e4e3",
+    "firmware/serial.c": "a3b69f8e19bd6a0cb8d30fe20768052bc307a62d186979de2d8e2a1063e52f4d",
+    "firmware/usb.c": "703462a8614e60156b1f02569c8c2996d4141c5fd30bf25f6f49e4707d21a914",
+    "firmware/test_ethernet.c": "24df5154d864f0740f1edc68fbdb39a4b9623865bcfc62065ba61339e008408b",
+    "firmware/programs.c": "98224d53ebd1db455cea41a6a2eb0b4fead58eaebcb039d9c0c34c1e3e3a7bb8",
+    "firmware/serial.h": "ffb8be599a810c7df952e095408d3e3e8fa100788881c21caa12557d6561c2a7",
+    "firmware/README.md": "6ea3ce62983f0f4aa0bd9484e074e177671932f38f4ebf3133a0d5fe940b0ea1",
+    "firmware/ethernet.h": "9d6771da52d4b5fd5202118a2b491c5f97d26e9860bc03735dac6efb2162800d",
+    "firmware/serial_program.c": "eb46909414428a59f713b0df6f4799fc98dc3e1452a11c08557543ac4d55eb78",
+    "firmware/usb.h": "a7b33650d765d8d36610900c88ad5b592d696a074e66d35f5e4c77376bd67a56",
+    "firmware/ethernet_program.c": "1435bee81eb96491f975cac04ef0f17e3033c417ce81884cf3086342b826c25c",
+    "test/test_serial.py": "42cb5578aa49a00a4ecbc4433c28db2ba478bbd277326b8609375ae3df460511",
+    "test/test_errors.py": "04b848644db26037ce3dc0e7a9862da34eb2b9c2ac0d7b6a7d894df43f625d96",
+    "test/tb.v": "c73c8afefa806cc6133b33b85eefb8dfd88a6cb11797e29e30ff5517b168fe92",
+    "test/test.py": "e6b6f5bfeccd5de1f45a6247d00ecdfd64dc8a24d087cb64d988aea9c406797c",
+    "test/test_ethernet.py": "7797a0dddb73f2c68cbf85c0bd1366ceee0834cf741af87197c3f24ebd9590a1",
+    "test/test_verification.py": "190ac9b4d37c6e45ec3958c66e89f227bbd2f8aeba52c3d15ac69284264475f5"
+  },
+  "command": "NETLIST=/tmp/protoemu-ci-recovery/original/runs/wokwi/final/nl/tt_um_protoemu.nl.v CELL_MODELS=/tmp/protoemu-iverilog13/models IVERILOGPATH=/tmp/protoemu-iverilog13/install/bin COCOTB_PYTHON=/tmp/protoemu-test-env/bin/python GATE_BUILD=/tmp/protoemu-ci-recovery/routed-gate PROTOEMU_GATE_PROFILE=1 tools/gate-test.sh",
+  "log_sha256": "6b3936fb888a58cf83c8f6b9dc4fdfa98a047c55ac09cbbcd4a66c6457b245d2"
+}

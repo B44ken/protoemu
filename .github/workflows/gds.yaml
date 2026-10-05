@@ -10,6 +10,10 @@ on:
 jobs:
   gds:
     runs-on: ubuntu-24.04
+    timeout-minutes: 350
+    permissions:
+      contents: read
+      actions: read
     steps:
       - name: checkout repo
         uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
@@ -17,10 +21,33 @@ jobs:
           submodules: recursive
 
       - name: Build GDS
+        id: build-gds
+        # Leave time to save checkpoints before the runner's six-hour limit.
+        timeout-minutes: 330
         uses: TinyTapeout/tt-gds-action@3412659307918422f3f0727917cf9b499aaca588
         with:
           pdk: ihp-sg13cmos5l
           tools-ref: d66cf179e7bc4d296362ab7e2e3b344dc3c4f665
+
+      - name: Check retained build logs
+        id: retained-logs
+        if: ${{ always() && steps.build-gds.outcome != 'success' }}
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          retained=$(gh api "repos/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}/artifacts" --jq '.artifacts | any(.name == "GDS_logs")')
+          echo "retained=$retained" >> "$GITHUB_OUTPUT"
+
+      - name: Retain interrupted physical build
+        if: ${{ always() && steps.build-gds.outcome != 'success' && steps.retained-logs.outputs.retained != 'true' }}
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
+        with:
+          name: physical_checkpoint
+          path: |
+            runs/wokwi/**
+            src/config_merged.json
+          if-no-files-found: warn
+          retention-days: 1
 
   precheck:
     needs: gds
@@ -46,6 +73,8 @@ jobs:
         uses: TinyTapeout/tt-gds-action/gl_test@3412659307918422f3f0727917cf9b499aaca588
 
   viewer:
+    # Validation branches retain artifacts without publishing a Pages viewer.
+    if: ${{ github.ref == 'refs/heads/main' }}
     needs: gds
     runs-on: ubuntu-24.04
     permissions:

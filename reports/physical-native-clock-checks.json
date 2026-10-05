@@ -1,0 +1,56 @@
+{
+  "tool": "native OpenSTA 857316ff001b2a8dbbdc5996944d08a6d38c87ab with pinned librelane fix_cell_delays.patch",
+  "tool_sha256": "07326af438f1eac7d1243a4b1307c98892cdd577006d648a54a7031a8c362695",
+  "source_run": 37258898939,
+  "flops": 4649,
+  "input_sha256": {
+    "nl/tt_um_protoemu.nl.v": "f524ff5da5311d1f05fdb4ee535677fa00aca5b157da53d08c939fe97c2c7bc0",
+    "sdc/tt_um_protoemu.sdc": "9e36fc9742a022949176cd8fc5c93a51a35fea00cf7c46eec6aef6d28c3f6f1f",
+    "spef/nom/tt_um_protoemu.nom.spef": "d3048149004bfb4c6475f165075bcad40de157682040e48ed7a5ceb80aa90d2f"
+  },
+  "clock_hook_sha256": "498af23124f1b781ecd719a79c593daecfa0e10cd5c53ecf4dd8c55574fda5b2",
+  "corners": {
+    "fast": {
+      "pulse_checks": 9298,
+      "flop_clock_pins": 4649,
+      "pulse_violations": 0,
+      "minimum_reported_pulse_slack_ns": 8.21,
+      "timing_lines": [
+        "worst slack max 7.98",
+        "worst slack min 0.12",
+        "tns max 0.00"
+      ],
+      "library_sha256": "af12d75a72d19648fa690027d29843fbae550aa91f4e40dd3339c7116d6e425d",
+      "script": "define_corners fast\nread_liberty -corner fast /tmp/protoemu-contingency/pdk/fast_1p32V_m40C.lib\nread_verilog /tmp/protoemu-ci-recovery/original/runs/wokwi/final/nl/tt_um_protoemu.nl.v\nlink_design tt_um_protoemu\nread_sdc /tmp/protoemu-ci-recovery/original/runs/wokwi/final/sdc/tt_um_protoemu.sdc\nread_spef /tmp/protoemu-ci-recovery/original/runs/wokwi/final/spef/nom/tt_um_protoemu.nom.spef\ncheck_setup -verbose\nreport_parasitic_annotation\nreport_worst_slack -max\nreport_worst_slack -min\nreport_tns\nset corner_name fast\nsource /Users/brad/git/protoemu/tools/clock-checks.tcl\nexit\n",
+      "log_sha256": "9e49dc3c6c886e6e6b054f5cc1aeab5cc49dac7402ebde4bde6e179d4c937f8f"
+    },
+    "slow": {
+      "pulse_checks": 9298,
+      "flop_clock_pins": 4649,
+      "pulse_violations": 0,
+      "minimum_reported_pulse_slack_ns": 8.03,
+      "timing_lines": [
+        "worst slack max -4.67",
+        "worst slack min 0.63",
+        "tns max -806.06"
+      ],
+      "library_sha256": "3ee222c580ba33acb2131ac2bf224ff8ee9700751835b73aaec72b670bb31d3c",
+      "script": "define_corners slow\nread_liberty -corner slow /tmp/protoemu-contingency/pdk/slow_1p08V_125C.lib\nread_verilog /tmp/protoemu-ci-recovery/original/runs/wokwi/final/nl/tt_um_protoemu.nl.v\nlink_design tt_um_protoemu\nread_sdc /tmp/protoemu-ci-recovery/original/runs/wokwi/final/sdc/tt_um_protoemu.sdc\nread_spef /tmp/protoemu-ci-recovery/original/runs/wokwi/final/spef/nom/tt_um_protoemu.nom.spef\ncheck_setup -verbose\nreport_parasitic_annotation\nreport_worst_slack -max\nreport_worst_slack -min\nreport_tns\nset corner_name slow\nsource /Users/brad/git/protoemu/tools/clock-checks.tcl\nexit\n",
+      "log_sha256": "695d5a14ffc061386a6108a2406339a9ccd4d07f1f78b17503dd79a3a6f6ed36"
+    },
+    "typ": {
+      "pulse_checks": 9298,
+      "flop_clock_pins": 4649,
+      "pulse_violations": 0,
+      "minimum_reported_pulse_slack_ns": 8.13,
+      "timing_lines": [
+        "worst slack max 3.31",
+        "worst slack min 0.30",
+        "tns max 0.00"
+      ],
+      "library_sha256": "34163f3e7de9f854afac57332ba06f1739b78e7ac35660a8a5ddd39c570124ad",
+      "script": "define_corners typ\nread_liberty -corner typ /tmp/protoemu-contingency/pdk/typ_1p20V_25C.lib\nread_verilog /tmp/protoemu-ci-recovery/original/runs/wokwi/final/nl/tt_um_protoemu.nl.v\nlink_design tt_um_protoemu\nread_sdc /tmp/protoemu-ci-recovery/original/runs/wokwi/final/sdc/tt_um_protoemu.sdc\nread_spef /tmp/protoemu-ci-recovery/original/runs/wokwi/final/spef/nom/tt_um_protoemu.nom.spef\ncheck_setup -verbose\nreport_parasitic_annotation\nreport_worst_slack -max\nreport_worst_slack -min\nreport_tns\nset corner_name typ\nsource /Users/brad/git/protoemu/tools/clock-checks.tcl\nexit\n",
+      "log_sha256": "3f74f2fa8870edf950686d2c5c92ddd1f1f93ad6e63838515f6b974a904a3fc9"
+    }
+  }
+}

@@ -1,6 +1,6 @@
 # physical flow
 
-status: [original build](https://github.com/B44ken/protoemu/actions/runs/37258898939) running at `00aff9a7a26e86f5d067502fcc4c8b2f93e3cab4`; [clock-gated candidate](https://github.com/B44ken/protoemu/actions/runs/37265810882) running at `7f239cb6a2889425a2c33bd026d0a79761fd2928`. synthesis estimates do not establish routed timing or fabrication readiness.
+status: [original build](https://github.com/B44ken/protoemu/actions/runs/37258898939) completed routing at `00aff9a7a26e86f5d067502fcc4c8b2f93e3cab4` but failed slow-corner setup timing (330 violations, worst slack −4.670621 ns). [clock-gated candidate](https://github.com/B44ken/protoemu/actions/runs/37265810882) at `7f239cb6a2889425a2c33bd026d0a79761fd2928` exceeded the six-hour job limit during routing. see [recovery evidence](physical-recovery.md). physical sign-off remains incomplete.
 
 ## constraints
 
