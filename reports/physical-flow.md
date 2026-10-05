@@ -1,6 +1,6 @@
 # physical flow
 
-status: [official routed build](https://github.com/B44ken/protoemu/actions/runs/37258898939) running at `00aff9a7a26e86f5d067502fcc4c8b2f93e3cab4`. synthesis estimates do not establish routed timing or fabrication readiness.
+status: [original build](https://github.com/B44ken/protoemu/actions/runs/37258898939) running at `00aff9a7a26e86f5d067502fcc4c8b2f93e3cab4`; [clock-gated candidate](https://github.com/B44ken/protoemu/actions/runs/37265810882) running at `7f239cb6a2889425a2c33bd026d0a79761fd2928`. synthesis estimates do not establish routed timing or fabrication readiness.
 
 ## constraints
 
@@ -48,5 +48,7 @@ physical silicon measurements and usb/ethernet electrical tests require hardware
 ## intermediate evidence
 
 at 2026-10-05 03:27:18 utc, [step 37, post-cts timing repair](https://github.com/B44ken/protoemu/actions/runs/37258898939/job/111601700921#step:3:8167) reported 37,689 cells and 614,098.20 um², about 68% of the available cell rows. this includes 446 clock buffers and 9,052 timing repair buffers. the same area appeared after global routing at 03:27:54 utc. these are intermediate measurements, not extracted sign-off; detailed routing is still optimizing.
+
+the candidate reached the same step at 05:06:00 utc: 29,438 cells and 489,006.20 um², about 54.2% of rows. this includes 128 clock gates, 1,258 clock buffers and 4,214 timing repair buffers. physical area is 20.4% below the original at this step; routing and the per-corner gate-enable/pulse reports still need verification.
 
 the timestamped cell-type lines are retained in [physical-intermediate.md](physical-intermediate.md).
