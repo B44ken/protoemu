@@ -1,6 +1,6 @@
 # physical flow
 
-status: official routed build pending. synthesis estimates do not establish routed timing or fabrication readiness.
+status: [official routed build](https://github.com/B44ken/protoemu/actions/runs/37258898939) running at `00aff9a7a26e86f5d067502fcc4c8b2f93e3cab4`. synthesis estimates do not establish routed timing or fabrication readiness.
 
 ## constraints
 
@@ -21,13 +21,13 @@ status: official routed build pending. synthesis estimates do not establish rout
 - [ihp open pdk](https://github.com/IHP-GmbH/IHP-Open-PDK/tree/2bbec755dc67ca3db0261c3d6163e15735d66710): `2bbec755dc67ca3db0261c3d6163e15735d66710`
 - official gate tests: icarus 13.0, cocotb 2.0.1, original stdcell and udp models, `-gspecify -DFUNCTIONAL`
 
-local full flow was unavailable: no docker daemon, openroad, magic, klayout or nix; 3.4 gib free. the build uses the official github environment. local mapping and ideal-clock sta remain useful estimates only.
+local full flow was unavailable: no docker daemon, openroad, magic, klayout or nix. the build uses the official github environment. local mapping and ideal-clock sta remain useful estimates only.
 
 ## evidence required
 
 1. completed official rtl-to-gds flow at the recorded source commit, including detailed routing and clock tree synthesis.
 2. final extracted multicorner sta: setup and hold violation counts zero; reported setup/hold slack, clock period, constraints, parasitic annotation and corners inspected.
-3. flow lvs: extracted layout agrees with the netlist; zero lvs errors.
+3. flow connectivity lvs and final-gds lvs: zero errors. the default magic extraction uses def/lef; direct gds extraction must also pass before claiming final-layout lvs.
 4. detailed-router drc and antenna results inspected; separate tiny tapeout precheck passes all cmos5l checks.
 5. final routed-netlist integration tests pass. these are functional cell simulations; extracted delays are checked by sta, not by these tests.
 6. retained gds/oas, lef, routed verilog, spef, resolved config, pdk metadata, source commit and reports.
@@ -40,5 +40,7 @@ precheck runs nine cmos5l checks: pin-label overlap, foundry drc, zero area, lay
 - `GDS_logs`: per-step logs, reports and final views.
 - `precheck_reports`: layout-check xml and markdown.
 - `gatelevel_test_results`: routed functional integration xml.
+
+final-gds lvs follow-up uses the supported librelane cli: `--from Magic.SpiceExtraction --to Checker.LVS --override-config MAGIC_EXT_USE_GDS=true`, initialized with the exact gds, routed def and powered netlist. it reuses completed routing.
 
 physical silicon measurements and usb/ethernet electrical tests require hardware and are not supplied by this flow.

@@ -11,7 +11,7 @@ the existing host driver loads the real c-generated program and streams through 
 
 ## physical bring-up
 
-no fpga board is available. the usb inventory has no identified fpga/programmer or usb serial bridge. the attached `esp / usb comms` device has not been probed or programmed for this project. physical validation is pending.
+the user confirmed no fpga board is available. physical validation is pending.
 
 choose an fpga with enough logic for the core, 4096 bits of instruction memory, 32 fifo bytes, and a 60 mhz clock. a board-specific wrapper must implement bidirectional pads and preserve the core's output-enable behavior. expose the eight host inputs, eight host outputs, two host control pins, and the needed protocol pins. an on-board controller or fifo adapter must generate the documented four-clock setup/high/low strobes. ordinary pc usb/serial calls cannot provide cycle timing directly. ethernet needs buffered feeding at 2.5 million bytes/s or draining at 3.75 million bytes/s; its eight-byte fifos cannot absorb usb scheduling gaps. provide at least a full packet of local buffering for tx and about 10 kb for sampled rx.
 

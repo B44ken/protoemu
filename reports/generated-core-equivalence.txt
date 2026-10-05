@@ -18,3 +18,8 @@ native yosys miter compares all 87 output bits for all input/state values:
 state[76:0], tx_pop, rx_push, rx_data[7:0].
 sat -verify -prove trigger 0: no model found; proof succeeded.
 87 separate single-output-bit mutations all failed the proof as expected.
+
+linux ci also passed at 560cb2ed573163703c5065bf408469675d80113d:
+https://github.com/B44ken/protoemu/actions/runs/37260154220
+50,022 regenerated c/rtl cases; all 87 outputs proved with no input constraints.
+ci tool versions and downloaded test artifact audit: reports/ci-validation.md.

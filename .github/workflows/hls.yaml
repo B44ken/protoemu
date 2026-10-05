@@ -30,6 +30,7 @@ jobs:
           echo '1c91249e9671666b58d94e2fe8a81e6103d37b254eab77bd82625802c208bf4d  build/oss-cad-suite.tgz' | sha256sum -c -
           tar -xzf build/oss-cad-suite.tgz -C build
       - name: regenerate and compare all 87 outputs
+        shell: bash
         run: |
           export PATH="$PWD/build/oss-cad-suite/bin:$PATH"
           export PIPELINEC_DIR="$PWD/build/PipelineC" HLS_PYTHON="$PWD/build/venv/bin/python"
@@ -40,6 +41,19 @@ jobs:
           "$GHDL" --version
           "$CPP" --version
           ./tools/hls.sh
-          ./tools/formal-hls.sh src/engine.v "$HLS_OUTPUT"
+          ./tools/formal-hls.sh src/engine.v "$HLS_OUTPUT" 2>&1 | tee build/core-equivalence.log
       - name: prove fifo behavior and check rtl structure
-        run: PATH="$PWD/build/oss-cad-suite/bin:$PATH" make verify
+        run: PATH="$PWD/build/oss-cad-suite/bin:$PATH" VERIFY_BUILD="$PWD/build/verification" make verify
+      - name: retain verification evidence
+        if: always()
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
+        with:
+          name: verification
+          path: |
+            build/core-equivalence.log
+            build/verification/*.log
+            build/verification/*.ys
+            tools/formal-hls.sh
+            tools/fifo_spec.v
+            tools/verify.py
+            reports/verification*

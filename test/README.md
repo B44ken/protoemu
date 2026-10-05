@@ -1,47 +1,55 @@
-# Sample testbench for a Tiny Tapeout project
+# tests
 
-This is a sample testbench for a Tiny Tapeout project. It uses [cocotb](https://docs.cocotb.org/en/stable/) to drive the DUT and check the outputs.
-See below to get started or for more information, check the [website](https://tinytapeout.com/hdl/testing/).
-
-## Setting up
-
-1. Edit [Makefile](Makefile) and modify `PROJECT_SOURCES` to point to your Verilog files.
-2. Edit [tb.v](tb.v) and replace `tt_um_example` with your module name.
-
-## How to run
-
-To run the RTL simulation:
+run from the repository root with a c compiler, zlib, python, uv and iverilog:
 
 ```sh
-make -B
+make test                    # codecs, 50,022 c/rtl cases, 16 integrated rtl tests
+make verify                  # yosys structure checks and unbounded fifo proof
+make demo                    # independent ethernet peer and packet capture
 ```
 
-To run gatelevel simulation, first harden your project and copy `../runs/wokwi/results/final/verilog/gl/{your_module_name}.v` to `gate_level_netlist.v`.
-
-Then run:
+`make test-env` creates `/tmp/protoemu-test-env`; `TEST_ENV` selects another location. a focused run uses that environment:
 
 ```sh
-make -B GATES=yes
+PATH=/tmp/protoemu-test-env/bin:$PATH make -C test COCOTB_TEST_MODULES=test_verification
 ```
 
-If you wish to save the waveform in VCD format instead of FST format, edit tb.v to use `$dumpfile("tb.vcd");` and then run:
+| module | cases | coverage |
+| --- | ---: | --- |
+| `test` | 4 | uart duplex, usb tx/rx, faults and reprogramming |
+| `test_errors` | 3 | uart framing/break, uart skew, usb phase/frequency |
+| `test_serial` | 4 | all spi modes, i²c repeated start/read/stretch, nack and arbitration |
+| `test_ethernet` | 3 | frames/fcs/timing, receive phase/skew, fifo faults |
+| `test_verification` | 2 | asynchronous host transfers, fifo boundaries, address wrap, delay and reset |
+
+## gate simulation
+
+the `gds` workflow uses the official routed netlist and original cmos5l cell models. its `gl_test` job runs the same modules with `PROTOEMU_GATE_PROFILE=1`, selecting representative uart/usb/ethernet cases. gate simulation checks functional cell behavior; extracted timing is checked separately by sta.
+
+locally, put the hardened `tt_um_protoemu` netlist at `test/gate_level_netlist.v`, install the same pdk, and use icarus 13:
 
 ```sh
-make -B FST=
+PATH=/path/to/icarus13/bin:/tmp/protoemu-test-env/bin:$PATH \
+PROTOEMU_GATE_PROFILE=1 make -C test GATES=yes PDK_ROOT=/path/to/pdk
 ```
 
-This will generate `tb.vcd` instead of `tb.fst`.
-
-## How to view the waveform file
-
-Using GTKWave
+for a separately mapped netlist, `tools/gate-test.sh` snapshots the netlist, firmware and tests:
 
 ```sh
-gtkwave tb.fst tb.gtkw
+NETLIST=/path/to/mapped.v \
+CELL_MODELS=/path/to/cmos5l/verilog \
+IVERILOGPATH=/path/to/icarus13/bin \
+COCOTB_PYTHON=/tmp/protoemu-test-env/bin/python \
+PROTOEMU_GATE_PROFILE=1 tools/gate-test.sh
 ```
 
-Using Surfer
+results are written to `test/results.xml` or the gate runner's `GATE_BUILD` directory. saved evidence is under `reports/`.
+
+## waveforms
+
+waveform output is optional. this writes `test/tb.fst` for gtkwave or surfer:
 
 ```sh
-surfer tb.fst
+PATH=/tmp/protoemu-test-env/bin:$PATH make -C test \
+  COCOTB_TEST_MODULES=test_verification COCOTB_PLUSARGS=+dump FST=-fst
 ```

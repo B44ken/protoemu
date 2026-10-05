@@ -6,7 +6,7 @@ a c/hls first pass at the [jane street protocol emulator competition](https://bl
 
 an engine is a tiny hardware interpreter that executes uploaded instructions to drive and sample pins. two engines share 128 writable 32-bit instructions, so transmit and receive can keep independent timing. each has byte shift/scratch registers, pin outputs/enables, cycle delays and eight-byte transmit/receive fifos. input pins pass through two synchronizers. an instruction takes one clock plus its delay. spi and i²c each use one engine.
 
-`hls/engine.c` describes the hardware next-state function. pipelinec generates the checked-in verilog; a small wrapper supplies registers, program memory, fifos and host access. the c firmware emits explicit engine instructions; arbitrary c does not compile into microcode.
+`hls/engine.c` describes the hardware next-state function. pipelinec generates the checked-in verilog; a small wrapper supplies registers, program memory, fifos and host access. the c firmware emits explicit engine instructions; arbitrary c does not compile into microcode. the [instruction reference](firmware/README.md) explains how to write new programs.
 
 ## programs
 

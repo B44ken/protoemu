@@ -1,0 +1,20 @@
+# ci evidence
+
+audited completed logs and downloaded test artifacts on 2026-10-05 utc. both runs passed at [560cb2ed573163703c5065bf408469675d80113d](https://github.com/B44ken/protoemu/commit/560cb2ed573163703c5065bf408469675d80113d).
+
+| check | observed evidence |
+|---|---|
+| [hls run 37260154220](https://github.com/B44ken/protoemu/actions/runs/37260154220) | pinned regeneration; 50,022 c/rtl comparisons passed |
+| generated core equivalence | native yosys miter; all 87 output bits; empty input constraint equation; sat proof succeeded |
+| fifo and rtl structure | `make verify` passed; temporal induction with a first-cycle reset and unconstrained later reset/push/pop/data; single clock, no latches or asynchronous registers |
+| [test run 37260154180](https://github.com/B44ken/protoemu/actions/runs/37260154180) | 50,022 c/rtl comparisons; 30,960 usb codec cases; 432 ethernet codec cases |
+| rtl integration | downloaded junit: 16 tests, zero failures/errors/skips; includes asynchronous host/fifo boundaries and maximum delay/global reset |
+| independent ethernet peer | downloaded junit: 1 test, zero failures/errors/skips; scapy/cocotbext-eth arp and maximum-size udp echo |
+
+[test-results artifact](https://github.com/B44ken/protoemu/actions/runs/37260154180/artifacts/11324034429) contains both junit files, the demo result, packet capture and tcpdump decode. its capture has four frames of 60, 60, 1514 and 1514 bytes; its pcap and result json match the committed reports byte for byte. pcap sha256: `b3ac8fcb27d850fa099b07b804f8069b9718da2507c7e759a46df00c637c8810`.
+
+hls tools observed: pipelinec `ab93e524494fb47d3d6926b76c09333a150a10ba`; python 3.13.7; ghdl 6.0.0 `e589c698c`; gnu cpp 13.3.0 (`13.3.0-6ubuntu2~24.04.1`); oss cad suite 2026-10-01, yosys 0.69+173 `53f1cdd34-dirty`. both pinned archive sha256 checks passed. test tools: python setup 3.11.16, icarus 12.0, cocotb 2.0.1, scapy 2.8.0, cocotbext-eth 0.1.28.
+
+the hls log retains the complete core proof; the fifo step redirects detailed solver output locally, so its public log contains the successful checked subprocess result. the fifo proof command at this head uses `sat -verify -prove correct 1 -set legal 1 -seq 1 -tempinduct -maxsteps 4 -set-def-inputs`.
+
+these checks validate rtl simulation and formal behavior. the ethernet artifact records physical validation as pending.
