@@ -19,10 +19,6 @@
   "//": "The value is in nanoseconds, so 20ns == 50MHz.",
   "CLOCK_PERIOD": 16.666667,
 
-  "//": "map logic for slow-corner timing rather than typical-corner area",
-  "SYNTH_CORNER": "nom_slow_1p08V_125C",
-  "SYNTH_STRATEGY": "DELAY 0",
-
   "//": "gate each instruction-memory word with the characterized pdk cell",
   "SYNTH_CLOCKGATE_MIN_WIDTH": 32,
   "SYNTH_CLOCKGATE_POSEDGE_ICG": "sg13cmos5l_lgcp_1/GATE/CLK/GCLK",
@@ -33,7 +29,10 @@
 
   "//": "Hold slack margin - Increase them in case you are getting hold violations.",
   "PL_RESIZER_HOLD_SLACK_MARGIN": 0.1,
-  "GRT_RESIZER_HOLD_SLACK_MARGIN": 0.05,
+  "GRT_RESIZER_HOLD_SLACK_MARGIN": 0.2,
+
+  "//": "optimize ahead of the measured estimate-to-extracted setup loss; signoff remains 60 MHz",
+  "GRT_RESIZER_SETUP_SLACK_MARGIN": 6.0,
 
   "//": "repair timing with global-route parasitics before detailed routing",
   "RUN_POST_GRT_RESIZER_TIMING": true,

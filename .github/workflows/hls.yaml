@@ -56,6 +56,5 @@ jobs:
             build/verification/*.ys
             tools/formal-hls.sh
             tools/fifo_spec.v
-            tools/imem_spec.v
             tools/verify.py
             reports/verification*

@@ -1,0 +1,26 @@
+{
+  "commit": "3f603a18f707e2aad05bc83525a5debc666e7f8c",
+  "run": 37443121334,
+  "artifact": 11409392825,
+  "artifact_sha256": "c49ff036502e9e32ca45ca68cf34f255b04ddb84fc4324b34e760826657edef9",
+  "result": "routing and Magic DRC pass; extracted setup and hold fail",
+  "signoff_note": "flow LVS is not separately verified final-GDS LVS; KLayout DRC disabled in baseline",
+  "metrics": {
+    "timing__hold__ws__corner:nom_fast_1p32V_m40C": -0.11829337844095596,
+    "timing__setup__ws__corner:nom_fast_1p32V_m40C": 4.8120211399792545,
+    "timing__hold_vio__count__corner:nom_fast_1p32V_m40C": 1,
+    "timing__setup_vio__count__corner:nom_fast_1p32V_m40C": 0,
+    "timing__hold__ws__corner:nom_slow_1p08V_125C": 0.6488803011901925,
+    "timing__setup__ws__corner:nom_slow_1p08V_125C": -12.047762239959393,
+    "timing__hold_vio__count__corner:nom_slow_1p08V_125C": 0,
+    "timing__setup_vio__count__corner:nom_slow_1p08V_125C": 341,
+    "timing__hold__ws__corner:nom_typ_1p20V_25C": 0.20938540383086907,
+    "timing__setup__ws__corner:nom_typ_1p20V_25C": -1.2085852660743923,
+    "timing__hold_vio__count__corner:nom_typ_1p20V_25C": 0,
+    "timing__setup_vio__count__corner:nom_typ_1p20V_25C": 4,
+    "design__instance__area__stdcell": 440172,
+    "magic__drc_error__count": 0,
+    "design__lvs_error__count": 0
+  },
+  "next_experiment": "return to best routed baseline read/synthesis (055e190), retain standard clock spacing, add6ns global-route setup optimization margin and0.2ns hold optimization margin. Final clock and corner checks unchanged."
+}
