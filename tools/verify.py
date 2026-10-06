@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""check rtl structure and symbolic fifo behavior using yosys."""
+"""check rtl structure, symbolic fifo behavior and instruction read equivalence using yosys."""
 import hashlib
 import json
 import os
@@ -20,6 +20,14 @@ def run(name, script):
         subprocess.run([yosys, '-Q', '-T', '-s', str(out / f'{name}.ys')],
                        stdout=log, stderr=subprocess.STDOUT, check=True)
 
+
+run('imem', f"""read_verilog {json.dumps(str(root / 'src/project.v'))}
+read_verilog {json.dumps(str(root / 'tools/imem_spec.v'))}
+prep -top imem_spec
+flatten
+memory_map
+opt
+sat -verify -prove correct 1 -set-def-inputs -timeout 50""")
 
 run('structure', f"""read_verilog {' '.join(json.dumps(str(p)) for p in sources)}
 hierarchy -check -top tt_um_protoemu
@@ -64,6 +72,8 @@ summary = {'rtl_sha256': {p.name: hashlib.sha256(p.read_bytes()).hexdigest() for
            'structure': {'hierarchy': 'pass', 'driver_checks': 'pass', 'latches': 0,
                          'asynchronous_registers': 0, 'clock': 'single positive-edge clk',
                          'uio_synchronizers': 'two stages; first stage feeds only second stage'},
+           'imem': {'proof': 'exhaustive combinational SAT', 'addresses': 128,
+                    'data': '4096 unconstrained binary bits', 'added_latency': 0},
            'fifo': {'proof': 'unbounded temporal induction', 'first_cycle_reset': True,
                     'subsequent_inputs': 'unconstrained reset/push/pop/data',
                     'checked': ['data order', 'occupancy', 'ready', 'valid',
@@ -72,4 +82,4 @@ summary = {'rtl_sha256': {p.name: hashlib.sha256(p.read_bytes()).hexdigest() for
 (root / 'reports/verification-fifo.txt').write_text('\n'.join(
     line for line in (out / 'fifo.log').read_text().splitlines()
     if 'induction' in line.lower()) + '\n')
-print('rtl structure and unbounded symbolic fifo proof passed')
+print('rtl structure, instruction read equivalence and unbounded symbolic fifo proof passed')

@@ -1,0 +1,32 @@
+{
+  "commit": "dd6c089972c59c544f7236017ab1864c9b573d94",
+  "run": 37377232587,
+  "artifact": 11387920342,
+  "artifact_sha256": "78f426c5712cf15d0d4c172428fdad65eefcbf8a4833e526a88184ab2b6f3b0b",
+  "result": "timeout during Magic.DRC; post-route timing also fails",
+  "routing_drc": 0,
+  "antenna_violations": 0,
+  "magic_drc": "incomplete",
+  "lvs": "not run",
+  "precheck": "not run",
+  "gate_level_tests": "not run",
+  "clock_period_ns": 16.666667,
+  "metrics": {
+    "design__max_slew_violation__count__corner:nom_fast_1p32V_m40C": 0,
+    "design__max_cap_violation__count__corner:nom_fast_1p32V_m40C": 15,
+    "timing__setup__ws__corner:nom_fast_1p32V_m40C": 7.803571343322158,
+    "timing__hold_vio__count__corner:nom_fast_1p32V_m40C": 0,
+    "timing__setup_vio__count__corner:nom_fast_1p32V_m40C": 0,
+    "design__max_slew_violation__count__corner:nom_slow_1p08V_125C": 175,
+    "design__max_cap_violation__count__corner:nom_slow_1p08V_125C": 15,
+    "timing__setup__ws__corner:nom_slow_1p08V_125C": -5.131236025761171,
+    "timing__hold_vio__count__corner:nom_slow_1p08V_125C": 0,
+    "timing__setup_vio__count__corner:nom_slow_1p08V_125C": 330,
+    "design__max_slew_violation__count__corner:nom_typ_1p20V_25C": 28,
+    "design__max_cap_violation__count__corner:nom_typ_1p20V_25C": 15,
+    "timing__setup__ws__corner:nom_typ_1p20V_25C": 3.0819578872410833,
+    "timing__hold_vio__count__corner:nom_typ_1p20V_25C": 0,
+    "timing__setup_vio__count__corner:nom_typ_1p20V_25C": 0
+  },
+  "next_experiment": "decode asynchronous instruction read once per word, balanced OR tree; no added cycle; binary read equivalence proved separately; physical benefit unverified"
+}
