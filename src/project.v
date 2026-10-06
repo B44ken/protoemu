@@ -115,23 +115,27 @@ module tt_um_protoemu (
     wire _unused = &{ena, 1'b0};
 endmodule
 
-// Decode once per word so PC bits do not drive 32 separate 128:1 mux trees.
-// This remains a combinational read: instruction timing and writes are unchanged.
+// Eight local 16-word decoded reads feed a small final bank selector.
+// This remains combinational, with no change to instruction cycles or writes.
 module proto_imem_read (
     input wire [4095:0] words,
     input wire [6:0] address,
     output wire [31:0] instruction
 );
-    wire [31:0] tree [1:255];
-    genvar word, node;
+    wire [31:0] bank_words [0:7];
+    genvar bank, word, node;
     generate
-        for (word = 0; word < 128; word = word + 1) begin: select_word
-            wire selected_word = address == word;
-            assign tree[128 + word] = words[32 * word +: 32] & {32{selected_word}};
-        end
-        for (node = 1; node < 128; node = node + 1) begin: reduce_words
-            assign tree[node] = tree[2 * node] | tree[2 * node + 1];
+        for (bank = 0; bank < 8; bank = bank + 1) begin: read_bank
+            wire [31:0] tree [1:31];
+            for (word = 0; word < 16; word = word + 1) begin: select_word
+                wire selected_word = address[3:0] == word;
+                assign tree[16 + word] = words[32 * (16 * bank + word) +: 32] & {32{selected_word}};
+            end
+            for (node = 1; node < 16; node = node + 1) begin: reduce_words
+                assign tree[node] = tree[2 * node] | tree[2 * node + 1];
+            end
+            assign bank_words[bank] = tree[1];
         end
     endgenerate
-    assign instruction = tree[1];
+    assign instruction = bank_words[address[6:4]];
 endmodule

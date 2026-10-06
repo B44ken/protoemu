@@ -1,0 +1,11 @@
+{
+  "commit": "ac4af6040d2744d9a2ec808826984eb5031448d5",
+  "run": 37409664842,
+  "result": "global route stopped by GRT-0228; horizontal grid edge usage1822 exceeds1700",
+  "rtl_and_independent_ethernet_tests": "passed CI37409664755",
+  "hls_and_imem_fifo_structure_proofs": "passed CI37409664734",
+  "post_route_timing": "not reached",
+  "artifact": 11388848755,
+  "artifact_sha256": "d0fd4fdc9c175b6cc27a7bda5b1dcab8acb6d9cfd535c6d5faf0cdeb318ab291",
+  "next_experiment": "eight16worddecodedreadbanks then8to1selector; no addedcycles; binary equivalenceproved; route benefit unverified"
+}
