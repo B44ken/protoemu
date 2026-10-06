@@ -5,6 +5,8 @@ on:
     paths:
       - "src/**"
       - "info.yaml"
+      - "tools/*.sdc"
+      - ".github/workflows/gds.yaml"
   workflow_dispatch:
 
 jobs:
