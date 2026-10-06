@@ -1,0 +1,11 @@
+{
+  "commit": "19712e1b15c5c7fbac2cc2592e4851f322718cf4",
+  "run": 37410692801,
+  "result": "330 minute timeout in ResizerTimingPostGRT global rerouting",
+  "first_global_route_seconds": 11791.498,
+  "routing_observation": "Repeated 50-iteration attempts before dropping NDR on individual gated-clock nets; first route eventually completed, post-GRT reroute timed out",
+  "post_route_timing": "not reached; inherited early-corner metrics are not final results",
+  "artifact": 11401806792,
+  "artifact_sha256": "d47280d5914d89d03692d0cf25f4ed05ff6387ec742259b473ea77826b761e87",
+  "next_experiment": "CTS_APPLY_NDR none: ordinary PDK spacing on clocks, retain existing DRC checks and three-corner setup/hold/clock pulse signoff; physical integrity still unverified"
+}

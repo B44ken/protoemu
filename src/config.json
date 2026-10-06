@@ -79,6 +79,9 @@
   "//": "Clock",
   "RUN_CTS": 1,
 
+  "//": "use ordinary PDK spacing; per-gated-clock NDR fallback exhausted routing runtime",
+  "CTS_APPLY_NDR": "none",
+
   "//": "Don't generate power rings",
   "FP_PDN_MULTILAYER": 0,
 
