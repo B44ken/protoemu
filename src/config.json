@@ -18,6 +18,8 @@
   "//": "CLOCK_PERIOD - Increase this in case you are getting setup time violations.",
   "//": "The value is in nanoseconds, so 20ns == 50MHz.",
   "CLOCK_PERIOD": 16.666667,
+  "PNR_SDC_FILE": "dir::../tools/pnr-margin.sdc",
+  "SIGNOFF_SDC_FILE": "dir::../tools/signoff.sdc",
 
   "//": "gate each instruction-memory word with the characterized pdk cell",
   "SYNTH_CLOCKGATE_MIN_WIDTH": 32,
