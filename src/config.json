@@ -21,6 +21,9 @@
   "PNR_SDC_FILE": "dir::../tools/pnr-margin.sdc",
   "SIGNOFF_SDC_FILE": "dir::../tools/signoff.sdc",
 
+  "//": "avoid the weak NOR3 drive variant responsible for the remaining extracted slow-corner slew failures",
+  "EXTRA_EXCLUDED_CELLS": ["sg13cmos5l_nor3_1"],
+
   "//": "gate each instruction-memory word with the characterized pdk cell",
   "SYNTH_CLOCKGATE_MIN_WIDTH": 32,
   "SYNTH_CLOCKGATE_POSEDGE_ICG": "sg13cmos5l_lgcp_1/GATE/CLK/GCLK",

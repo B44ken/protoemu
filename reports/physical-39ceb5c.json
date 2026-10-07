@@ -1,0 +1,65 @@
+{
+  "commit": "39ceb5cb24442521f660c2b933ee39476c570864",
+  "run": 37548537241,
+  "run_url": "https://github.com/B44ken/protoemu/actions/runs/37548537241",
+  "artifact": 11456889679,
+  "artifact_sha256": "c25241f13764ada5d26817b092e70cc2eb8590a46d5af8b7705cc9fdb606a3c3",
+  "result": "GDS build and gate-level tests passed; all-corner 60MHz setup/hold pass; final precheck pending at report creation",
+  "metrics": {
+    "design__max_slew_violation__count__corner:nom_fast_1p32V_m40C": 0,
+    "design__max_cap_violation__count__corner:nom_fast_1p32V_m40C": 0,
+    "timing__hold__ws__corner:nom_fast_1p32V_m40C": 0.17871438168513876,
+    "timing__setup__ws__corner:nom_fast_1p32V_m40C": 10.213876256092489,
+    "timing__hold_vio__count__corner:nom_fast_1p32V_m40C": 0,
+    "timing__setup_vio__count__corner:nom_fast_1p32V_m40C": 0,
+    "design__max_slew_violation__count__corner:nom_slow_1p08V_125C": 4,
+    "design__max_cap_violation__count__corner:nom_slow_1p08V_125C": 0,
+    "timing__hold__ws__corner:nom_slow_1p08V_125C": 0.8076061159523621,
+    "timing__setup__ws__corner:nom_slow_1p08V_125C": 1.6496653399131074,
+    "timing__hold_vio__count__corner:nom_slow_1p08V_125C": 0,
+    "timing__setup_vio__count__corner:nom_slow_1p08V_125C": 0,
+    "design__max_slew_violation__count__corner:nom_typ_1p20V_25C": 0,
+    "design__max_cap_violation__count__corner:nom_typ_1p20V_25C": 0,
+    "timing__hold__ws__corner:nom_typ_1p20V_25C": 0.41330906533762607,
+    "timing__setup__ws__corner:nom_typ_1p20V_25C": 7.149858685258314,
+    "timing__hold_vio__count__corner:nom_typ_1p20V_25C": 0,
+    "timing__setup_vio__count__corner:nom_typ_1p20V_25C": 0,
+    "design__max_slew_violation__count": 4,
+    "design__max_cap_violation__count": 0,
+    "timing__hold__ws": 0.17871438168513876,
+    "timing__setup__ws": 1.6496653399131074,
+    "timing__hold_vio__count": 0,
+    "timing__setup_vio__count": 0,
+    "design__instance__area__stdcell": 498434,
+    "magic__drc_error__count": 0,
+    "magic__illegal_overlap__count": 0,
+    "design__lvs_error__count": 0,
+    "route__drc_errors": 0,
+    "antenna__violating__nets": 0,
+    "antenna__violating__pins": 0
+  },
+  "remaining_slew": [
+    {
+      "driver": "_21623_/Y",
+      "cell": "sg13cmos5l_nor3_1",
+      "slew_ns": 3.392479,
+      "sink": "_21624_/B",
+      "sink_slew_ns": 3.397484,
+      "limit_ns": 2.5074
+    },
+    {
+      "driver": "_23228_/Y",
+      "cell": "sg13cmos5l_nor3_1",
+      "slew_ns": 2.640032,
+      "sink": "_23246_/B",
+      "sink_slew_ns": 2.641604,
+      "limit_ns": 2.5074
+    }
+  ],
+  "limitations": [
+    "Four slow-corner slew checks remain on two NOR3_1 outputs and their sink pins.",
+    "Clock-net fanout warnings remain in checks.rpt; this is not a claim of completely clean electrical signoff.",
+    "Final-GDS LVS was not separately verified."
+  ],
+  "next_experiment": "Exclude sg13cmos5l_nor3_1 from synthesis and PnR; preserve all timing/area requirements and standard signoff constraints. The available nor3_2 has the same !(A+B+C) function; actual area and timing impact require CI."
+}
