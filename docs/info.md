@@ -19,8 +19,8 @@ Frames are 8 data bits, LSB first, with optional parity and one or two stop bits
 
 ## How to test
 
-Set config bit 3 (loopback), write bytes to register 3, and read them back: wait for status bit 1, read register 4, then write register 4 to drop the byte. Without loopback, connect `uio[0]` and `uio[2]` to a USB serial adapter at 115200 8N1.
+Set config bit 3 (loopback), write bytes to register 3, and read them back: wait for status bit 1, read register 4, then write register 4 to drop the byte. Without loopback, any 115200 8N1 device on `uio[0]` and `uio[2]` can talk to it, including the demo board's RP2350.
 
 ## External hardware
 
-A 3.3 V USB serial adapter.
+None.
