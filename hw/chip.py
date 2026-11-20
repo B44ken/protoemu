@@ -100,6 +100,10 @@ def chip():
         addr = 0
         din = 0
         state = IDLE
+        delay = 0
+        shift = 0
+        bits = 0
+        baud = 0
         tx = 1
     else:
         men = 1
