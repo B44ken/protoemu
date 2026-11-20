@@ -17,7 +17,7 @@
 
   "//": "CLOCK_PERIOD - Increase this in case you are getting setup time violations.",
   "//": "The value is in nanoseconds, so 20ns == 50MHz.",
-  "CLOCK_PERIOD": 20,
+  "CLOCK_PERIOD": 16.667,
 
   "//": "Hold slack margin - Increase them in case you are getting hold violations.",
   "PL_RESIZER_HOLD_SLACK_MARGIN": 0.1,
@@ -30,6 +30,53 @@
   "//": "If you need a custom clock configuration, read the following documentation first:",
   "//": "https://tinytapeout.com/faq/#how-can-i-map-an-additional-external-clock-to-one-of-the-gpios",
   "CLOCK_PORT": "clk",
+
+  "//": "======== IHP SRAM macro (RM_IHPSG13_1P_256x16_c2_bm_bist) ========",
+
+  "//": "Insert the Project.ExtendPowerStripes step (librelane_plugin_sram_pdn.py) after the PDN generator.",
+  "meta": {
+    "flow": "Classic",
+    "substituting_steps": { "+OpenROAD.GeneratePDN": "Project.ExtendPowerStripes" }
+  },
+
+  "//": "Macro views straight from the PDK (sg13cmos5l_sram is a link to sg13g2_sram).",
+  "//": "The instance sits at the bottom left, flipped (FS) so that its pins (on its bottom edge) face up",
+  "//": "towards the logic. x = 3.36 puts the macro's power columns right under the PDN stripes (defined by FP_PDN_* below).",
+  "MACROS": {
+    "RM_IHPSG13_1P_256x16_c2_bm_bist": {
+      "instances": {
+        "sram": { "location": [3.36, 3.78], "orientation": "FS" }
+      },
+      "gds": ["pdk_dir::libs.ref/sg13cmos5l_sram/gds/RM_IHPSG13_1P_256x16_c2_bm_bist.gds"],
+      "lef": ["pdk_dir::libs.ref/sg13cmos5l_sram/lef/RM_IHPSG13_1P_256x16_c2_bm_bist.lef"],
+      "lib": {
+        "*_typ_*": ["pdk_dir::libs.ref/sg13cmos5l_sram/lib/RM_IHPSG13_1P_256x16_c2_bm_bist_typ_1p20V_25C.lib"],
+        "*_fast_*": ["pdk_dir::libs.ref/sg13cmos5l_sram/lib/RM_IHPSG13_1P_256x16_c2_bm_bist_fast_1p32V_m55C.lib"],
+        "*_slow_*": ["pdk_dir::libs.ref/sg13cmos5l_sram/lib/RM_IHPSG13_1P_256x16_c2_bm_bist_slow_1p08V_125C.lib"]
+      }
+    }
+  },
+
+  "//": "The SRAM has two supply rails (VDD!, VDDARRAY!) and one ground rail (VSS!).",
+  "PDN_MACRO_CONNECTIONS": [
+    "sram VPWR VGND VDD! VSS!",
+    "sram VPWR VGND VDDARRAY! VSS!"
+  ],
+
+  "//": "PDN: Skip connecting the SRAM by pdngen; it is powered by ExtendPowerStripes instead.",
+  "PDN_CFG": "dir::pdn_cfg.tcl",
+  "//": "Optional: extra power stripe pairs over the SRAM's bit-cell arrays, for better power delivery to the macro.",
+  "EXTEND_STRIPES_SRAM_ARRAY_EVERY_OTHER": true,
+  "//": "pdngen checks the SRAM's power connections before ExtendPowerStripes makes them, so errors are expected at this stage.",
+  "ERROR_ON_PDN_VIOLATIONS": 0,
+
+  "//": "Magic DRC flags many errors inside the SRAM macro (seen in the SG13G2 SRAM projects).",
+  "//": "The Tiny Tapeout precheck runs the full KLayout DRC deck on the final GDS instead.",
+  "RUN_MAGIC_DRC": 0,
+
+  "//": "Magic extracts the SRAM from its LEF abstract, so the power stripes crossing the macro's",
+  "//": "Metal4 obstruction show up as illegal overlaps (there is no metal there in the GDS).",
+  "ERROR_ON_ILLEGAL_OVERLAPS": 0,
 
   "//": "Configuration docs: https://librelane.readthedocs.io/en/latest/reference/configuration.html",
 
@@ -58,8 +105,12 @@
   "FP_IO_HLENGTH": 2,
   "FP_IO_VLENGTH": 2,
 
-  "FP_PDN_VPITCH": 50.0,
+  "//": "PDN stripes matched to the SRAM's Metal4 power columns: 44.96 = 4 x 11.24 um column pitch,",
+  "//": "2.1 + 3.52 = 5.62 um from VPWR to VGND as in the macro, first VPWR stripe centred at 9.03 um.",
+  "FP_PDN_VPITCH": 44.96,
   "FP_PDN_VWIDTH": 2.1,
+  "FP_PDN_VSPACING": 3.52,
+  "FP_PDN_VOFFSET": 6.15,
 
   "//": "Clock",
   "RUN_CTS": 1,
