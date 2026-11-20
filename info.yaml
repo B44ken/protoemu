@@ -2,7 +2,7 @@ project:
   title:        "protoemu"
   author:       "B44ken"
   discord:      ""
-  description:  "uart with 128-byte sram fifos"
+  description:  "uart, spi and i2c controllers with sram fifos"
   language:     "Verilog"
   clock_hz:     60000000
   tiles:        "8x4"
@@ -31,12 +31,12 @@ pinout:
   uo[6]: "register data 6"
   uo[7]: "register data 7"
 
-  uio[0]: "uart tx"
-  uio[1]: "rx data available"
-  uio[2]: "uart rx"
-  uio[3]: ""
+  uio[0]: "uart tx / spi sck / i2c scl"
+  uio[1]: "uart rx / spi mosi / i2c sda"
+  uio[2]: "spi miso"
+  uio[3]: "spi cs"
   uio[4]: ""
-  uio[5]: ""
+  uio[5]: "rx data available"
   uio[6]: "host strobe"
   uio[7]: "host command/data"
 

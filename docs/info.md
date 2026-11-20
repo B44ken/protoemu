@@ -1,26 +1,36 @@
 ## How it works
 
-A UART with 128-byte transmit and receive FIFOs, both held in the IHP SRAM.
+A UART, an SPI controller and an I²C controller. They share the protocol pins and two 128-byte FIFOs held in the IHP SRAM; the config register picks which one runs.
 
 A host drives an 8-bit bus. A command byte (`uio[7]` high) selects a register; data bytes (`uio[7]` low) act on it, and `uo_out` always shows the selected register. Each byte is latched on a rising edge of `uio[6]`; hold it stable for four clocks before and after.
 
 | register | read | write |
 | --- | --- | --- |
-| 0 divisor low | | clocks per bit − 1, low byte (default 520: 115200 baud at 60 MHz) |
-| 1 divisor high | | high byte |
-| 2 config | | bit 0 parity, 1 odd parity, 2 two stop bits, 3 loopback |
+| 0 divisor low | low byte | see below; default 520 |
+| 1 divisor high | high byte | |
+| 2 config | config | bits 1:0 mode (0 UART, 1 SPI, 2 I²C), 2 parity, 3 odd parity, 4 two stop bits, 5 loopback, 6 CPOL, 7 CPHA |
 | 3 tx | bytes queued | queue a byte |
 | 4 rx | oldest received byte | drop it |
 | 5 status | flags | write 1s to clear bits 3–6 |
+| 6 spi cs | CS level | CS level (default 1) |
+| 7 i2c command | | bit 0 start or repeated start, 1 read (else write the next queued byte), 2 NACK the read byte, 3 stop after, 4 no byte |
 
-Status bits: 0 tx has space, 1 rx data available, 2 tx idle, 3 rx overrun, 4 framing error, 5 parity error, 6 tx overflow (byte written while full). Bits 3–6 stay set until cleared.
+Status bits: 0 tx has space, 1 rx data available, 2 idle (nothing queued or in flight), 3 rx overrun, 4 framing error, 5 parity error, 6 tx overflow (byte or I²C command written while full), 7 last I²C write NACKed. Bits 3–6 stay set until cleared.
 
-Frames are 8 data bits, LSB first, with optional parity and one or two stop bits. The receiver samples mid-bit and checks the first stop bit. `uio[1]` is high while received data is waiting.
+The divisor sets the timing, in 60 MHz clocks minus one:
+
+- **UART:** clocks per bit. 520 is 115200 baud. Frames are 8 data bits, LSB first, with optional parity and one or two stop bits; the receiver samples mid-bit.
+- **SPI:** clocks per half SCK period, 3 or more. Every queued byte is sent MSB first in the selected mode, and the byte read from MISO goes to rx. The host drives CS through register 6.
+- **I²C:** clocks per quarter SCL period. 149 is 100 kHz and 38 is 385 kHz, both within standard and fast mode timing. Write the data byte to tx, then a command; wait for idle before the next command. Read bytes go to rx. Targets may stretch the clock. There is no multi-controller arbitration.
+
+`uio[5]` is high while received data is waiting.
 
 ## How to test
 
-Set config bit 3 (loopback), write bytes to register 3, and read them back: wait for status bit 1, read register 4, then write register 4 to drop the byte. Without loopback, any 115200 8N1 device on `uio[0]` and `uio[2]` can talk to it, including the demo board's RP2350.
+UART: set config bit 5 (loopback), write bytes to register 3, then for each: wait for status bit 1, read register 4, write register 4 to drop it. SPI loopback works the same way with config `0x21` (SPI, loopback).
+
+I²C: with pull-ups on `uio[0]` and `uio[1]`, write tx `0xA0` and command `0x01` (start, write the address), tx `0x10` and command `0x00`, then tx `0x42` and command `0x08` (stop). Status bit 7 reports a NACK.
 
 ## External hardware
 
-None.
+Pull-up resistors on SCL and SDA for I²C.
