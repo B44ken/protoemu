@@ -9,7 +9,6 @@ the logic is [pypeline](https://github.com/JulianKemmerer/PipelineC) in `hw/chip
 ```sh
 mkdir -p .tools
 git clone https://github.com/JulianKemmerer/PipelineC.git .tools/PipelineC
-git -C .tools/PipelineC checkout 3d0b54a  # tested version
 gh release download v6.0.0 --repo ghdl/ghdl -p 'ghdl-llvm-6.0.0-macos15-aarch64.tar.gz' -O - | (mkdir -p .tools/ghdl && tar -xz -C .tools/ghdl --strip-components 1)
 python3 -m venv .tools/venv && .tools/venv/bin/pip install setuptools pyparsing pyrtl -r test/requirements.txt
 ```
@@ -20,5 +19,3 @@ python3 -m venv .tools/venv && .tools/venv/bin/pip install setuptools pyparsing 
 hw/build.sh                                    # hw/chip.py -> src/chip.v
 cd test && PATH=../.tools/venv/bin:$PATH make  # cocotb + icarus, with ihp's sram model
 ```
-
-gate-level sims need icarus 13: 12 never clocks the ihp flip-flop models. ci hardens the chip and runs the same test on its netlist.
